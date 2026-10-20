@@ -18,8 +18,14 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14"]
-keywords = []
-dependencies = []
+keywords = ["judges", "ideology", "judicial common space", "nominate", "federal courts"]
+dependencies = [
+    "openpyxl>=3.1",
+    "pandas>=3.0",
+    "requests>=2.31"]
+
+[project.scripts]
+judicial-common-space = "judicial_common_space.__main__:main"
 
 [project.optional-dependencies]
 
@@ -34,7 +40,7 @@ Changelog = "https://WithPrecedent.github.io/judicial_common_space/changelog"
 [dependency-groups]
 dev = [
     "uv",
-    
+
     "markdown-callouts",
     "markdown-exec",
     "mkdocs",
@@ -47,8 +53,10 @@ dev = [
     "mkdocstrings[python]",
     "toml",
     "mypy",
+    "pandas-stubs",
     "pre-commit",
     "ruff",
+    "types-requests",
     {include-group = "tests"}]
 tests = [
     "coverage",
@@ -129,6 +137,7 @@ lint.ignore = [
     "PLR0912",  # Too many branches
     "PLR0913",  # Too many arguments to function call
     "PLR0915",  # Too many statements
+    "PLR2004",  # Magic value used in comparison
     "PLR1711", # Useless 'return' at the end of function
     "Q000",  # Single quotes found but double quotes preferred
     "RET505",  # Unnecessary `else` after `return` statement
