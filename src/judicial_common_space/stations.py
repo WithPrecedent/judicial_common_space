@@ -26,10 +26,6 @@ Contents:
     match: returns the Wikipedia state of each appointment to a court of
         appeals.
     parse: returns the judges in the source text of one article.
-    _FIELD: pattern for the fields of a row that are used.
-    _LINK: pattern for a link, with the words that it shows.
-    _ROW: pattern for the start of a row.
-    _SORTNAME: pattern for a name written with the "sortname" template.
 
 """
 

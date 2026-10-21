@@ -99,7 +99,121 @@ Illinois and Stephen Trott in Idaho), a few D.C. Circuit judges and the
 Federal Circuit judges who came from the Court of Customs and Patent
 Appeals, which the published file scores differently, and some apparent
 slips in the published files. The spreadsheet's check sheets list every
-comparison.
+comparison, and the next section explains every one that differs by more
+than 0.05.
+
+## Where they differ
+
+These are every judge and justice whose computed score differs from the
+published one by more than 0.05, with the default settings. (The 689 other
+circuit judges, 2,529 district judges, and 780 justice-terms are within 0.05
+of the published scores.)
+
+### Circuit judges and Epstein et al.
+
+| Judge | Circuit | Published | Computed | Why |
+| --- | ---: | ---: | ---: | --- |
+| Giles Rich | Fed. | 0.692 | 0.281 | Eisenhower appointed him to the Court of Customs and Patent Appeals, whose judges were moved to the new Federal Circuit in 1982. The published score is Reagan's, as if he were appointed then; the computed one is Eisenhower's. |
+| John Nalbandian | 6th | 0.648 | 0.371 | The computed score is Ohio's Rob Portman's (Nalbandian practiced in Cincinnati, and Wikipedia gives Ohio as his duty station). The published one matches no Ohio senator and is the same as the two Florida judges' of 2019, so it looks like a slip. |
+| Richard Cudahy | 7th | −0.333 | −0.583 | The published score is Illinois's Adlai Stevenson III's. Cudahy's career and duty station were in Wisconsin. |
+| Stephen Trott | 9th | 0.590 | 0.352 | The published score is Idaho's two senators', where Trott later sat. He came from California. |
+| Jay Bybee | 9th | 0.693 | 0.508 | The published score is George W. Bush's. Bybee taught in Nevada, which is also his duty station, and Nevada's John Ensign was a Republican. |
+| Morris Arnold | 8th | 0.381 | 0.557 | Arkansas's two senators were Democrats, so the computed score is the first President Bush's. The published one matches only Arizona's John McCain. |
+| Karen Henderson | D.C. | 0.391 | 0.557 | The published score is South Carolina's Strom Thurmond's, where she had been a district judge. The published file gives every other D.C. Circuit judge who came from a district court the president's score. |
+| Luther Swygert | 7th | −0.580 | −0.420 | He came from Indiana's district court, so the computed score is Indiana's Vance Hartke's. The published one is Illinois's Paul Douglas's. |
+| James Browning | 9th | −0.461 | −0.311 | The published score is Montana's two senators', where he was born. The computed one is Washington's, from his last job in the circuit before he worked in Washington, D.C. |
+| Howard Markey | Fed. | 0.692 | 0.552 | As with Rich: Reagan's score in the published file, and Nixon's, who appointed him, here. |
+| John Hartigan | 1st | −0.299 | −0.391 | The published score is the mean of the two senators who held Rhode Island's seats when he was nominated. The computed one counts all four who sat in that Congress (`--senators date` gives the published score). |
+| H. Nathan Swaim | 7th | −0.447 | −0.374 | The published score is Illinois's two senators'. He came from Indiana, whose senators were Republicans, so the computed score is Truman's. |
+| Cindy Chung | 3rd | −0.313 | −0.245 | The published score is Bob Casey's alone; John Fetterman, who joined the Senate in 2023, was apparently not in the file it was made from. |
+| Carl McGowan | D.C. | −0.405 | −0.472 | The published score matches no senators; the computed one is Kennedy's, as for other D.C. Circuit judges. |
+
+### District judges and Boyd
+
+75 of the 86 district judges who differ by more than 0.05 differ only
+because of how senators are counted. By default, the score counts every
+senator who sat in the Congress of the nomination; Boyd counts the senators
+who held the seats on the day, as `--senators date` does, which gives every
+one of these judges Boyd's score:
+
+| State | Nominated | Judges | Boyd | Computed | Senators counted who did not hold the seats that day |
+| --- | --- | ---: | ---: | ---: | --- |
+| Alabama | 1938 | 1 | −0.275 | −0.336 | Hugo Black (left for the Supreme Court in 1937) |
+| Alabama | 1945 | 1 | −0.275 | −0.177 | John Sparkman and George Swift (joined in 1946) |
+| Alabama | 2018 | 5 | 0.446 | 0.518 | Jeff Sessions and Luther Strange (left in 2017 and January 2018) |
+| Arkansas | 1937 | 1 | −0.302 | −0.228 | John E. Miller (joined after the nomination) |
+| Arkansas | 1977 | 1 | −0.173 | −0.246 | Kaneaster Hodges (joined after the nomination) |
+| Arkansas | 1978 | 1 | −0.378 | −0.246 | John McClellan (died in 1977) |
+| California | 1950 | 1 | −0.374 | −0.263 | Sheridan Downey (resigned in 1950), so Boyd has Truman's score |
+| California | 1964 | 1 | −0.462 | −0.341 | Clair Engle (died in 1964) |
+| California | 2021–2022 | 12 | −0.345 | −0.473 | Kamala Harris (left in January 2021) |
+| California | 2024 | 9 | −0.435 | −0.378 | Dianne Feinstein (died in 2023) and Adam Schiff (joined in December 2024) |
+| Colorado | 1995–1996 | 2 | −0.438 | −0.141 | Ben Nighthorse Campbell (a Republican from March 1995), so Boyd has Clinton's score |
+| Georgia | 1999 | 1 | −0.220 | −0.037 | Zell Miller (joined in 2000) |
+| Indiana | 1943 | 1 | −0.115 | −0.248 | Samuel D. Jackson (joined in 1944) |
+| Kentucky | 1939 | 1 | −0.384 | −0.318 | Happy Chandler (joined after the nomination) |
+| Kentucky | 1946 | 1 | −0.375 | −0.281 | Happy Chandler (resigned in 1945) |
+| Massachusetts | 2014 | 4 | −0.631 | −0.519 | John Kerry and Mo Cowan (left in 2013) |
+| Missouri | 1945 | 1 | −0.258 | −0.309 | Harry Truman (left to be vice president) |
+| New York | 1937–1938 | 2 | −0.243 | −0.311 | James Mead (joined in 1938) |
+| New York | 1949 | 2 | −0.458 | −0.558 | Herbert Lehman (joined in November 1949) |
+| New York | 1950 | 5 | −0.658 | −0.558 | Robert Wagner (resigned in 1949) |
+| North Carolina | 1949 | 1 | −0.020 | −0.167 | Frank Graham and Willis Smith (joined after the nomination) |
+| North Carolina | 1985 | 1 | 0.617 | 0.501 | James Broyhill (joined in 1986) |
+| Oregon | 1937 | 1 | −0.368 | −0.490 | Alfred Reames (joined in 1938), so Boyd has Roosevelt's score |
+| Rhode Island | 1950 | 1 | −0.299 | −0.391 | J. Howard McGrath and Edward Leahy (left the Senate before the nomination; Leahy is the judge) |
+| South Carolina | 1941 | 2 | −0.212 | −0.297 | James Byrnes (left for the Supreme Court in 1941) |
+| South Carolina | 1966 | 1 | −0.031 | −0.099 | Olin Johnston (died in 1965) |
+| Texas | 1942 | 2 | 0.018 | −0.106 | Morris Sheppard (died in 1941) |
+| Texas | 1962 | 4 | −0.416 | −0.155 | William Blakley (left in 1961) |
+| Texas | 1993–1994 | 7 | −0.438 | −0.117 | Bob Krueger (left in June 1993), so Boyd has Clinton's score |
+| Washington | 1939–1940 | 2 | −0.149 | −0.243 | Monrad Wallgren (joined in December 1940) |
+
+The other 11 differ for reasons that seem to lie in Boyd's file:
+
+| Judges | Boyd | Computed | Why |
+| --- | ---: | ---: | --- |
+| James Connell (Ohio, 1954) | 0.164 | 0.446 | Boyd's score is the mean of John Bricker's and Thomas Burke's, but Burke was a Democrat and Eisenhower a Republican. |
+| John Cannella, Charles Tenney, Bernard Moynahan (New York and Kentucky, 1963), and Orrin Judd, Morris Lasker, Anthony Travia (New York, 1967–1968) | −0.337 | −0.472 | Boyd gives all six Lyndon Johnson's score. The first three were nominated by Kennedy, before his death; for the others, the senator of Johnson's party was Robert Kennedy, whose score is −0.472. |
+| Cyrus Tavares (Hawaii, 1961) | 0.281 | 0.165 | Boyd gives Eisenhower's score, leaving out Hiram Fong, a Republican. |
+| Leonard Stark (Delaware, 2010) | −0.353 | −0.281 | Boyd's score is the mean of Ted Kaufman's and Joe Biden's, who had left the Senate to be vice president. |
+| Edmond Chang (Illinois, 2010) | −0.345 | −0.403 | Boyd leaves out Roland Burris, who held a seat until November 2010. |
+| James Allred (Texas, 1939) | −0.219 | −0.275 | Unexplained: Boyd's score matches no Texas senators. |
+
+### Justices and Epstein et al.
+
+| Justice | Term | Published | Computed | Why |
+| --- | ---: | ---: | ---: | --- |
+| Ketanji Brown Jackson | 2022 | −0.444 | −0.577 | Her first term. The current Martin-Quinn scores, which include her later terms, estimate it again. |
+| Clarence Thomas | 2022 | 0.648 | 0.701 | The same re-estimate of the 2022 term. |
+
+### Using the published scores
+
+`--use-published` (off by default) gives a judge or a justice's term the
+published score wherever it differs from the computed one by more than 0.05
+(or `--published-threshold`): Epstein et al.'s for circuit judges and
+justices, and Boyd's for district judges. The Scores and Justices sheets
+then say where each score came from (`jcs_source`) and keep the computed
+score beside it (`computed_jcs`); the check sheets still compare the
+computed scores. With the default settings, it replaces the scores of 95
+appointments since 1953 (80 district judges, 14 circuit judges, and Justice
+Jackson's appointment, from her first term) and of two justice-terms; with
+`--senators date`, it replaces 46 (13 district judges, 32 circuit judges,
+and Justice Jackson's).
+
+Use it to reproduce the published scores, as when a study must line up with
+earlier work that used them. It is off by default because:
+
+* The two sources count senators differently (Boyd by the day, Epstein et al.
+  by the Congress), so taking both mixes their rules: with either setting of
+  `--senators`, one of them is overruled.
+* Some of the published scores that it would take look like slips, such as
+  John Nalbandian's, Morris Arnold's, James Connell's, and the six New York
+  and Kentucky judges'.
+* Only judges in the published files can be replaced, so judges appointed in
+  the same circumstances can end up with scores made by different rules.
+* The published scores were made with older Voteview files, so they lag
+  behind the current scores of senators who are still serving.
 
 ## Getting started
 
@@ -143,14 +257,16 @@ judicial_common_space.run('judicial_common_space.xlsx', start_year = 1953)
 | `--data-folder` | `data/courts` beside the code folder | Where the downloads are kept: the same folders that [courtpy](https://github.com/WithPrecedent/courtpy) uses, so the projects share them. Set `JUDICIAL_COMMON_SPACE_DATA_DIR` to change it for good. |
 | `--overwrite` | off | Download the files again, as when the center has added judges or Voteview has added votes. |
 | `--no-download` | off | Use only the files that are already there. |
+| `--use-published` | off | Use the published score (Epstein et al.'s for circuit judges and justices, Boyd's for district judges) where it differs from the computed one by more than the threshold (see [Using the published scores](#using-the-published-scores)). |
+| `--published-threshold` | `0.05` | The largest difference from a published score that keeps the computed score, with `--use-published`. |
 | `--no-check` | off | Do not compare the scores with the published scores. |
 
 The spreadsheet has these sheets:
 
 | Sheet | Contents |
 | --- | --- |
-| Scores | A row for each appointment: `judge`, `nid`, `jid`, the court, the president and party, the dates, the Congress, `home_state` (a postal code) and `state_source` (how it was found), `duty_station` (Wikipedia's state for a circuit judge), `method` and `senators` (how the score was found), `president_score`, and `jcs`. |
-| Justices | Each justice's Martin-Quinn and JCS scores in each term. |
+| Scores | A row for each appointment: `judge`, `nid`, `jid`, the court, the president and party, the dates, the Congress, `home_state` (a postal code) and `state_source` (how it was found), `duty_station` (Wikipedia's state for a circuit judge), `method` and `senators` (how the score was found), `president_score`, `computed_jcs`, `jcs`, and `jcs_source` ("computed", or with `--use-published`, "Epstein et al." or "Boyd"). |
+| Justices | Each justice's Martin-Quinn and JCS scores in each term, with `computed_jcs` and `jcs_source`. |
 | Verification | The agreement with each set of published scores. |
 | Circuit check, District check, Justice check | Every comparison, with both scores and how the computed one was found. |
 | About | The method, the sources, and the settings. |

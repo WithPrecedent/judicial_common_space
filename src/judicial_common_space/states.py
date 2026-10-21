@@ -37,14 +37,6 @@ Contents:
     home_state: returns the state that a judge was appointed from, and how
         it was found.
     places: returns the states that a career entry names.
-    _ABBREVIATIONS: the postal code of each state, by its name.
-    _DISTRICT: pattern for the state in the name of a district court.
-    _NAMES: pattern for the names of the states and territories.
-    _NOT_A_STATE: pattern for the words after a state's name that make it
-        the name of a city or a county.
-    _NOT_THEIR_STATES: places whose names contain a state that they are not
-        in, with the states that they are in.
-    _YEARS: pattern for a year or a span of years in a career entry.
 
 """
 

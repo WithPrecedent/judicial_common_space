@@ -6,6 +6,9 @@
 | `district_judges` | Christina Boyd's scores of district judges, made by the same rule from the Federal Judicial Center's list of judges and Voteview's scores. | The center's "nid". |
 | `justices` | The Judicial Common Space scores of the justices in each term (the "supreme_court_long" file). | The term and the Supreme Court Database's name for the justice. |
 
+`use_published` can put the published score in place of a computed one
+that differs from it by more than 0.05 (`--use-published`).
+
 Each comparison is "same" if the scores differ by less than 0.0005 (the
 rounding of NOMINATE scores to three places), "close" if they differ by less
 than 0.02, and "different" otherwise. Voteview estimates the scores of every
@@ -17,16 +20,12 @@ Contents:
     circuit_judges: compares the scores of judges of the courts of appeals.
     district_judges: compares the scores of district judges.
     justices: compares the scores of justices in each term.
+    mark_computed: adds the columns that say where each score came from.
     match_name: returns the "nid" of a judge in the Judicial Common Space
         file of judges.
     summarize: returns the agreement of each comparison.
-    _CORRECTIONS: names and circuits that the published file of judges has
-        wrong, and names that judges have changed (from courtpy).
-    _CLOSE: the largest difference that counts as "close".
-    _DETAILS: the columns of the computed scores that are shown beside each
-        comparison.
-    _SAME: the largest difference that counts as "same".
-    _SUFFIXES: the words of names that are suffixes, such as "jr".
+    use_published: uses the published scores that differ from the computed
+        ones.
 
 """
 
@@ -51,6 +50,7 @@ _CORRECTIONS: dict[tuple[str, int], tuple[str, int]] = {
     ('Stark, Leonard', 12): ('Stark, Leonard', 13),
     ('Torruella del Valle, Juan R.', 1): ('Torruella, Juan R.', 1),
     ('Van Osterhout, Martin D.', 8): ('Van Oosterhout, Martin D.', 8)}
+_PUBLISHED_THRESHOLD: float = 0.05
 _SAME: float = 0.0005
 _SUFFIXES: frozenset[str] = frozenset({'jr', 'sr', 'i', 'ii', 'iii', 'iv'})
 _DETAILS: tuple[str, ...] = (
@@ -200,6 +200,98 @@ def match_name(name: str, court: pd.DataFrame) -> int | None:
     return int(fits[0]['nid']) if len(fits) == 1 else None
 
 
+def mark_computed(table: pd.DataFrame) -> pd.DataFrame:
+    """Adds the columns that say where each score came from.
+
+    Args:
+        table: scores of appointments (see `scores.appointments`) or of
+            justices' terms (see `scores.justices`), with a "jcs" column.
+
+    Returns:
+        A copy of the table with "computed_jcs" (the computed score) before
+            "jcs" and "jcs_source" ("computed") after it, unless it has them.
+
+    """
+    table = table.copy()
+    if 'jcs' not in table.columns or 'jcs_source' in table.columns:
+        return table
+    table.insert(list(table.columns).index('jcs'), 'computed_jcs', table['jcs'])
+    table.insert(list(table.columns).index('jcs') + 1, 'jcs_source', 'computed')
+    return table
+
+
+def use_published(
+    scored: pd.DataFrame,
+    terms: pd.DataFrame,
+    checks: Mapping[str, pd.DataFrame],
+    threshold: float = _PUBLISHED_THRESHOLD) -> tuple[
+        pd.DataFrame, pd.DataFrame]:
+    """Uses the published scores that differ from the computed ones.
+
+    Where a published score and the computed one differ by more than
+    `threshold`, the appointment (or the justice's term) gets the published
+    score, and "jcs_source" names where it came from: "Epstein et al." for
+    the Judicial Common Space scores of circuit judges and justices, and
+    "Boyd" for district judges. The appointment that gets it is the one that
+    the check compared (see `circuit_judges` and `district_judges`). A
+    justice's appointment gets the published score of its first term if that
+    term's score was replaced.
+
+    Args:
+        scored: the scores of the appointments (see `scores.appointments`).
+        terms: the justices' scores (see `scores.justices`).
+        checks: the results of `circuit_judges`, `district_judges`, and
+            `justices`, by the name of each check. Checks that are missing
+            change nothing.
+        threshold: the largest difference that keeps the computed score.
+            Defaults to 0.05.
+
+    Returns:
+        The two tables, with "computed_jcs" and "jcs_source" (see
+            `mark_computed`).
+
+    """
+    scored = mark_computed(scored)
+    terms = mark_computed(terms)
+
+    def large(name: str) -> pd.DataFrame:
+        check = checks.get(name)
+        if check is None or check.empty:
+            return pd.DataFrame()
+        difference = pd.to_numeric(check['difference'], errors = 'coerce')
+        return check[difference.abs() > threshold]
+
+    for row in large('circuit_judges').to_dict('records'):
+        rows = scored.index[
+            (scored['court_type'] == 'U.S. Court of Appeals')
+            & (scored['nid'] == row['nid'])
+            & (scored['circuit'] == row['circuit'])][:1]
+        _replace(scored, rows, row['published'], 'Epstein et al.')
+    for row in large('district_judges').to_dict('records'):
+        district = scored[
+            (scored['court_type'] == 'U.S. District Court')
+            & ~scored['reassigned'].astype(bool)
+            & (scored['nid'] == row['nid'])]
+        rows = district.sort_values('sequence').index[:1]
+        _replace(scored, rows, row['published'], 'Boyd')
+    for row in large('justices').to_dict('records'):
+        rows = terms.index[
+            (terms['term'] == row['term'])
+            & (terms['justiceName'] == row['justiceName'])]
+        _replace(terms, rows, row['published'], 'Epstein et al.')
+    if not terms.empty and 'jcs_source' in terms.columns:
+        known = terms.dropna(subset = ['nid', 'sequence']).sort_values('term')
+        first = known.drop_duplicates(['nid', 'sequence'])
+        first = first[first['jcs_source'] != 'computed']
+        for row in first.to_dict('records'):
+            rows = scored.index[
+                (scored['court_type'] == 'Supreme Court')
+                & (scored['nid'] == row['nid'])
+                & (scored['sequence'] == row['sequence'])]
+            _replace(scored, rows, row['jcs'], row['jcs_source'])
+    return scored, terms
+
+
 def summarize(checks: Mapping[str, pd.DataFrame]) -> pd.DataFrame:
     """Returns the agreement of each comparison.
 
@@ -286,6 +378,25 @@ def _finish(table: pd.DataFrame) -> pd.DataFrame:
     agreement[difference < _SAME] = 'same'
     agreement[difference.isna()] = 'not found'
     return table.assign(agreement = agreement)
+
+
+def _replace(
+    table: pd.DataFrame,
+    rows: pd.Index,
+    score: Any,
+    source: str) -> None:
+    """Puts a published score in rows of a table, in place.
+
+    Args:
+        table: a table with "jcs" and "jcs_source".
+        rows: the labels of the rows, which may be none.
+        score: the published score.
+        source: where it came from.
+
+    """
+    if len(rows):
+        table.loc[rows, 'jcs'] = float(score)
+        table.loc[rows, 'jcs_source'] = source
 
 
 def _words(text: str) -> list[str]:

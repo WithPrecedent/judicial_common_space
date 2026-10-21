@@ -19,8 +19,6 @@ in the "politics" folder (or pass its path).
 Contents:
     download: downloads the files that are missing.
     paths: returns where each file is kept.
-    _FOLDERS: the folder of each kind of file.
-    _NAMES: the name of each kind of file.
 
 """
 

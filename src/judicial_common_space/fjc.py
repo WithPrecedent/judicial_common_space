@@ -15,11 +15,6 @@ from `courtpy.judges.build_roster`.
 Contents:
     appointments: returns a row for each court that each judge served on.
     careers: returns the entries of each judge's career, in the file's order.
-    _COLUMNS: the columns of `appointments`, by their names in the file of
-        service.
-    _INHERITED: the columns that a reassigned judge's row takes from the
-        judge's row before.
-    _ORDINALS: the number of each court of appeals, by the words of its name.
 
 """
 

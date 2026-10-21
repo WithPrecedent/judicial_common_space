@@ -10,7 +10,6 @@
 
 Contents:
     write: writes the spreadsheet.
-    _ABOUT: the lines of the "About" sheet.
 
 """
 

@@ -1,54 +1,8 @@
 """Settings and reference tables that judicial_common_space uses.
 
-Contents:
-    _ARCTANGENT: the intercept and slope of the transformation of
-        Martin-Quinn scores into the Judicial Common Space (Epstein et al.'s
-        equation 2): "paper" for the article's, and "jcs2024" for those of
-        the 2024 release of the scores.
-    _BOYD_URL: address of Christina Boyd's scores of district judges, which
-        `verify` compares the district judges' scores with.
-    _CIRCUIT_STATES: the states and territories of each regional circuit.
-    _DATA_FOLDER: the folder where downloads are kept when no other is named.
-    _DC_AGENCIES: patterns for jobs in the federal government in Washington,
-        D.C., which career entries name without naming the city.
-    _DC_PLACES: patterns that name Washington, D.C.
-    _ENV_DATA: the environment variable that names another data folder.
-    _FJC_FILES: the Federal Judicial Center's files that are used.
-    _FJC_URL: address of the folder with the Federal Judicial Center's files.
-    _JCS_PAGE: address of the page that links to the current archive of
-        Judicial Common Space scores.
-    _JCS_FILES: patterns for the names of the files in that archive.
-    _LEGISLATORS_FILES: the files of the dates that senators served.
-    _LEGISLATORS_URL: address of the folder with those files.
-    _MINOR_POSITIONS: pattern for career entries that do not show where a
-        judge lived, such as visiting professorships.
-    _MQ_FILE: name of the file of each justice's Martin-Quinn score in each
-        term.
-    _MQ_PAGE: address of the page that links to it.
-    _NATIONAL_COURTS: the courts with national jurisdiction, whose judges have
-        no home state.
-    _OLD_FIFTH: the states of the Fifth Circuit before the Eleventh Circuit
-        was made from it.
-    _PARTY_CODES: Voteview's codes for the parties of presidents.
-    _PLACES: patterns for cities and schools that career entries name without
-        naming their states.
-    _PRESIDENTS: Voteview's number (ICPSR) for each president since McKinley,
-        by the name that the Federal Judicial Center gives the president.
-    _SPLIT_FIFTH: the day the Fifth Circuit was divided.
-    _START_YEAR: the first year of service that is included by default: 1953,
-        the first year of Epstein et al.'s study.
-    _STATES: the names of the states and territories, by their postal codes.
-    _TERRITORIES: the places with federal courts that have no senators.
-    _TIMEOUT: the number of seconds to wait for a server.
-    _USER_AGENT: how judicial_common_space identifies itself to servers.
-    _VOTEVIEW_FILE: name of Voteview's file of the ideology of every member.
-    _VOTEVIEW_URL: address of the folder with that file.
-    _WIKIPEDIA_API: address of Wikipedia's API, which returns the source
-        text (wikitext) of articles.
-    _WIKIPEDIA_FILE: name of the file of the articles on the courts of
-        appeals, which have the judges' duty stations.
-    _WIKIPEDIA_PAGES: the title of the article on each regional court of
-        appeals, by its number.
+They are module-level constants so that a project built on
+`judicial_common_space` can change them before they are used (for
+example, `judicial_common_space.options._START_YEAR = 1937`).
 
 """
 
@@ -65,10 +19,13 @@ import re
 _ARCTANGENT: dict[str, tuple[float, float]] = {
     'jcs2024': (0.1934, 0.6025),
     'paper': (-0.1736, 0.461)}
+# Address of Christina Boyd's scores of district judges, which `verify`
+# compares the district judges' scores with.
 _BOYD_URL: str = (
     'https://www.dropbox.com/scl/fi/g4vjqf26w9xn1ujc5vbww/'
     'Boyd-district-court-ideology-scores-through-118th-Cong-Aug2025.csv'
     '?rlkey=phjle9lyf3yadbbeyfs0iud57&dl=1')
+# The states and territories of each regional circuit.
 _CIRCUIT_STATES: dict[int, tuple[str, ...]] = {
     1: ('ME', 'MA', 'NH', 'PR', 'RI'),
     2: ('CT', 'NY', 'VT'),
@@ -86,6 +43,8 @@ _CIRCUIT_STATES: dict[int, tuple[str, ...]] = {
 # projects), where courtpy and fjc-idb keep their court data too.
 _DATA_FOLDER: pathlib.Path = (
     pathlib.Path(__file__).parents[4] / 'data' / 'courts')
+# Patterns for jobs in the federal government in Washington, D.C., which career
+# entries name without naming the city.
 _DC_AGENCIES: re.Pattern[str] = re.compile(
     r'U\.S\. Department of|Department of Justice|Solicitor General|'
     r'Office of Legal Counsel|White House|Executive Office of the President|'
@@ -94,8 +53,10 @@ _DC_AGENCIES: re.Pattern[str] = re.compile(
     r'U\.S\. House of Representatives|Supreme Court of the United States|'
     r'Georgetown|George Washington University|Howard University|'
     r'American University|Catholic University')
+# Patterns that name Washington, D.C.
 _DC_PLACES: re.Pattern[str] = re.compile(
     r'Washington,? D\.? ?C\.?|District of Columbia|D\.C\. Circuit')
+# The environment variable that names another data folder.
 _ENV_DATA: str = 'JUDICIAL_COMMON_SPACE_DATA_DIR'
 # The files of the Biographical Directory of Article III Federal Judges that
 # are organized by category, by what `sources.download` calls each.
@@ -103,29 +64,43 @@ _FJC_FILES: dict[str, str] = {
     'service': 'federal-judicial-service.csv',
     'demographics': 'demographics.csv',
     'career': 'professional-career.csv'}
+# Address of the folder with the Federal Judicial Center's files.
 _FJC_URL: str = 'https://www.fjc.gov/sites/default/files/history/'
+# Patterns for the names of the files in the archive of Judicial Common Space
+# scores, by what `sources.download` calls each.
 _JCS_FILES: dict[str, str] = {
     'judges': r'coa_judges',
     'justices': r'supreme_court.*long',
     'medians': r'medians'}
+# Address of the page that links to the current archive of Judicial Common
+# Space scores.
 _JCS_PAGE: str = 'https://epstein.wustl.edu/jcs'
+# The files of the dates that senators served.
 _LEGISLATORS_FILES: dict[str, str] = {
     'legislators_historical': 'legislators-historical.json',
     'legislators_current': 'legislators-current.json'}
+# Address of the folder with those files.
 _LEGISLATORS_URL: str = 'https://unitedstates.github.io/congress-legislators/'
+# Pattern for career entries that do not show where a judge lived, such as
+# visiting professorships.
 _MINOR_POSITIONS: re.Pattern[str] = re.compile(
     r'^\s*(Visiting|Adjunct|Lecturer|Instructor|Member|Board member|Trustee|'
     r'Fellow|Faculty fellow|Consultant|Chair, U\.S\. Sentencing|'
     r'Commissioner, U\.S\. Sentencing|U\.S\. (Army|Navy|Marine|Air|Coast)|'
     r'U\.S\. Naval|U\.S\. Army)',
     re.IGNORECASE)
+# Name of the file of each justice's Martin-Quinn score in each term.
 _MQ_FILE: str = 'justices.csv'
+# Address of the page that links to it.
 _MQ_PAGE: str = 'https://mqscores.wustl.edu/measures.php'
+# The courts with national jurisdiction, whose judges have no home state.
 _NATIONAL_COURTS: tuple[str, ...] = (
     'Federal Circuit', 'Court of International Trade', 'Customs Court',
     'Court of Claims', 'Court of Customs and Patent Appeals',
     'Commerce Court', 'Emergency Court of Appeals')
+# The states of the Fifth Circuit before the Eleventh Circuit was made from it.
 _OLD_FIFTH: tuple[str, ...] = ('AL', 'CZ', 'FL', 'GA', 'LA', 'MS', 'TX')
+# Voteview's codes for the parties of presidents.
 _PARTY_CODES: dict[str, int] = {'Democratic': 100, 'Republican': 200}
 # Places named without their states. A state that an entry names comes before
 # these, so "Columbia, South Carolina" is South Carolina, not New York.
@@ -160,6 +135,8 @@ _PLACES: tuple[tuple[re.Pattern[str], str], ...] = tuple(
         ((r'\bStanford\b|\bLos Angeles\b|\bSan Francisco\b|\bSan Diego\b|'
           r'\bBerkeley\b|\bUCLA\b|\bSacramento\b'), 'CA'),
         (r'\bSeattle\b', 'WA')))
+# Voteview's number (ICPSR) for each president since McKinley, by the name that
+# the Federal Judicial Center gives the president.
 _PRESIDENTS: dict[str, int] = {
     'William McKinley': 99892,
     'Theodore Roosevelt': 99893,
@@ -183,9 +160,11 @@ _PRESIDENTS: dict[str, int] = {
     'Barack Obama': 99911,
     'Donald J. Trump': 99912,
     'Joseph R. Biden': 99913}
+# The day the Fifth Circuit was divided.
 _SPLIT_FIFTH: str = '1981-10-01'
 # Epstein et al. scored the judges and justices who served from 1953.
 _START_YEAR: int = 1953
+# The names of the states and territories, by their postal codes.
 _STATES: dict[str, str] = {
     'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
     'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut',
@@ -205,14 +184,23 @@ _STATES: dict[str, str] = {
     'DC': 'District of Columbia', 'PR': 'Puerto Rico',
     'VI': 'Virgin Islands', 'GU': 'Guam', 'CZ': 'Canal Zone',
     'MP': 'Northern Mariana Islands'}
+# The places with federal courts that have no senators.
 _TERRITORIES: frozenset[str] = frozenset({'CZ', 'DC', 'GU', 'MP', 'PR', 'VI'})
+# The number of seconds to wait for a server.
 _TIMEOUT: int = 120
+# How judicial_common_space identifies itself to servers.
 _USER_AGENT: str = (
     'judicial_common_space '
     '(https://github.com/WithPrecedent/judicial_common_space)')
+# Name of Voteview's file of the ideology of every member.
 _VOTEVIEW_FILE: str = 'HSall_members.csv'
+# Address of the folder with that file.
 _VOTEVIEW_URL: str = 'https://voteview.com/static/data/out/members/'
+# Address of Wikipedia's API, which returns the source text (wikitext) of
+# articles.
 _WIKIPEDIA_API: str = 'https://en.wikipedia.org/w/api.php'
+# Name of the file of the articles on the courts of appeals, which have the
+# judges' duty stations.
 _WIKIPEDIA_FILE: str = 'circuit_duty_stations.json'
 # The articles on the regional courts of appeals, which list every judge
 # with the judge's state (or, for sitting judges, duty station).

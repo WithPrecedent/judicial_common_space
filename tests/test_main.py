@@ -31,6 +31,41 @@ def test_run(data_folder, tmp_path) -> None:
     assert 'senators: congress' in sheets['About']['About'].tolist()
 
 
+def test_run_with_published_scores(data_folder, tmp_path) -> None:
+    default = judicial_common_space.run(
+        tmp_path / 'default.xlsx', folder = data_folder, download = False)
+    scores = pd.read_excel(default, sheet_name = 'Scores')
+    assert (scores['jcs_source'] == 'computed').all()
+    assert scores['jcs'].equals(scores['computed_jcs'])
+    path = judicial_common_space.run(
+        tmp_path / 'published.xlsx', folder = data_folder, download = False,
+        use_published = True)
+    sheets = pd.read_excel(path, sheet_name = None)
+    scores = sheets['Scores'].set_index(['nid', 'sequence'])
+    # The published file gives Judge Poe 0.5, and the computed score is the
+    # president's, 0.692.
+    assert scores.loc[(3, 1), 'jcs'] == pytest.approx(0.5)
+    assert scores.loc[(3, 1), 'computed_jcs'] == pytest.approx(0.692)
+    assert scores.loc[(3, 1), 'jcs_source'] == 'Epstein et al.'
+    # Boyd's score of Judge Green differs from the computed one by 0.298.
+    assert scores.loc[(6, 1), 'jcs'] == pytest.approx(-0.438)
+    assert scores.loc[(6, 1), 'jcs_source'] == 'Boyd'
+    # Judge Doe's scores match, so they are computed.
+    assert scores.loc[(1, 1), 'jcs_source'] == 'computed'
+    # Each of Justice Smith's appointments gets its first term's score.
+    assert scores.loc[(5, 1), 'jcs'] == pytest.approx(0.0)
+    assert scores.loc[(5, 2), 'jcs'] == pytest.approx(0.0)
+    justices = sheets['Justices']
+    assert justices['jcs_source'].tolist() == [
+        'Epstein et al.', 'computed', 'computed', 'Epstein et al.',
+        'computed']
+    # The checks compare the computed scores.
+    summary = sheets['Verification'].set_index('check')
+    assert summary.loc['circuit_judges', 'same'] == 3
+    about = sheets['About']['About'].tolist()
+    assert 'use_published: True (threshold 0.05)' in about
+
+
 def test_run_starts_with_the_term_sitting_in_january(
     data_folder,
     tmp_path) -> None:
@@ -70,6 +105,15 @@ def test_cli(data_folder, tmp_path) -> None:
     assert 7 in scores['nid'].tolist()
     green = scores.query('nid == 6').iloc[0]
     assert green['method'] == 'president'
+    cli.main([
+        '--output', str(output), '--data-folder', str(data_folder),
+        '--no-download', '--use-published', '--published-threshold', '0.5'])
+    scores = pd.read_excel(output, sheet_name = 'Scores')
+    # Judge Poe's score differs from the published one by less than 0.5, as
+    # does Chief Justice Smith's first term (by 0.43).
+    assert scores.query('nid == 3').iloc[0]['jcs_source'] == 'computed'
+    assert scores.query('nid == 5')['jcs_source'].tolist() == [
+        'Epstein et al.', 'computed']
 
 
 def test_cli_rejects_unknown_choices() -> None:

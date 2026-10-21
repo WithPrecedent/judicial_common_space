@@ -71,6 +71,53 @@ def test_justices() -> None:
     assert check['agreement'].tolist() == ['same', 'not found']
 
 
+def test_mark_computed() -> None:
+    marked = verify.mark_computed(_scored())
+    columns = list(marked.columns)
+    assert columns[columns.index('jcs') - 1] == 'computed_jcs'
+    assert columns[columns.index('jcs') + 1] == 'jcs_source'
+    assert (marked['jcs_source'] == 'computed').all()
+    # A table that has them, or has no scores, is only copied.
+    assert verify.mark_computed(marked).equals(marked)
+    assert verify.mark_computed(pd.DataFrame()).empty
+
+
+def test_use_published() -> None:
+    circuit = pd.DataFrame({
+        'nid': [1, 2], 'circuit': [4, 9], 'published': [-0.2, 0.33],
+        'difference': [-0.15, -0.03]})
+    district = pd.DataFrame({
+        'nid': [3], 'published': [0.4], 'difference': [-0.3]})
+    terms = pd.DataFrame({
+        'term': [2020, 2021], 'justiceName': ['ACBarrett'] * 2,
+        'nid': [9, 9], 'sequence': [1, 1], 'jcs': [0.17, 0.18]})
+    justices = pd.DataFrame({
+        'term': [2020], 'justiceName': ['ACBarrett'], 'published': [0.43],
+        'difference': [-0.26]})
+    scored = pd.concat([_scored(), pd.DataFrame({
+        'nid': [9], 'judge': ['Barrett, Amy'], 'court_type': ['Supreme Court'],
+        'court': [''], 'circuit': [None], 'sequence': [1],
+        'reassigned': [False], 'jcs': [0.17]})], ignore_index = True)
+    checks = {
+        'circuit_judges': circuit, 'district_judges': district,
+        'justices': justices}
+    replaced, replaced_terms = verify.use_published(scored, terms, checks)
+    # Judge Roe's score differs by less than 0.05, so is kept.
+    assert replaced['jcs'].tolist() == [-0.2, 0.3, 0.4, 0.43]
+    assert replaced['computed_jcs'].tolist() == [-0.35, 0.3, 0.1, 0.17]
+    assert replaced['jcs_source'].tolist() == [
+        'Epstein et al.', 'computed', 'Boyd', 'Epstein et al.']
+    assert replaced_terms['jcs'].tolist() == [0.43, 0.18]
+    assert replaced_terms['jcs_source'].tolist() == [
+        'Epstein et al.', 'computed']
+    # A larger threshold keeps more of the computed scores.
+    kept, _ = verify.use_published(scored, terms, checks, threshold = 0.2)
+    assert kept['jcs_source'].tolist() == [
+        'computed', 'computed', 'Boyd', 'Epstein et al.']
+    nothing, _ = verify.use_published(scored, terms, {})
+    assert (nothing['jcs_source'] == 'computed').all()
+
+
 def test_summarize() -> None:
     check = pd.DataFrame({
         'published': [0.1, 0.2, 0.3, 0.4],

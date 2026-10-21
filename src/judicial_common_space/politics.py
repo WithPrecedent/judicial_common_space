@@ -31,8 +31,6 @@ Contents:
     congress: returns the number of the Congress that sat on a day.
     justices: returns each justice's Judicial Common Space score in each
         term.
-    _LEGISLATIVE_PARTIES: the parties of presidents, by the names that the
-        file of senators' dates gives them.
 
 """
 

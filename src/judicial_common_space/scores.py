@@ -22,7 +22,6 @@ Contents:
     appointments: returns the score of each appointment.
     justices: returns each justice's score in each term, with the
         Federal Judicial Center's numbers for the justice.
-    _COLUMNS: the columns of `appointments`.
 
 """
 

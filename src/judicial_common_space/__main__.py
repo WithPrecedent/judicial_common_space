@@ -4,6 +4,7 @@ Examples:
     python -m judicial_common_space
     judicial-common-space --output scores.xlsx --start-year 1980
     judicial-common-space --senators date --martin-quinn justices.csv
+    judicial-common-space --use-published --published-threshold 0.1
 
 """
 
@@ -14,7 +15,7 @@ import logging
 from collections.abc import Sequence
 
 from . import main as jcs
-from . import options
+from . import options, verify
 
 
 def main(arguments: Sequence[str] | None = None) -> None:
@@ -34,6 +35,8 @@ def main(arguments: Sequence[str] | None = None) -> None:
         senators = parsed.senators,
         martin_quinn = parsed.martin_quinn,
         transformation = parsed.transformation,
+        use_published = parsed.use_published,
+        published_threshold = parsed.published_threshold,
         download = not parsed.no_download,
         overwrite = parsed.overwrite,
         check = not parsed.no_check)
@@ -86,6 +89,20 @@ def _get_parser() -> argparse.ArgumentParser:
             'put Martin-Quinn scores on the scale as the 2024 release of the '
             'scores does ("jcs2024") or with the coefficients of the 2007 '
             'article ("paper") (default: %(default)s)'))
+    parser.add_argument(
+        '--use-published',
+        action = 'store_true',
+        help = (
+            'use the published score (Epstein et al. for circuit judges and '
+            'justices, Boyd for district judges) where it differs from the '
+            'computed one by more than --published-threshold'))
+    parser.add_argument(
+        '--published-threshold',
+        type = float,
+        default = verify._PUBLISHED_THRESHOLD,
+        help = (
+            'the largest difference from a published score that keeps the '
+            'computed score, with --use-published (default: %(default)s)'))
     parser.add_argument(
         '--data-folder',
         default = None,

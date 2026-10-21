@@ -10,9 +10,6 @@ Contents:
     compute: returns the scores of the appointments and of the justices.
     run: downloads the files that are missing, computes and checks the
         scores, and writes the spreadsheet.
-    _INPUTS: the kinds of files that the scores are computed from.
-    _PUBLISHED: the kinds of files of published scores that they are
-        checked against.
 
 """
 
@@ -109,6 +106,8 @@ def run(
     senators: str = 'congress',
     martin_quinn: pathlib.Path | str | None = None,
     transformation: str = 'jcs2024',
+    use_published: bool = False,
+    published_threshold: float = verify._PUBLISHED_THRESHOLD,
     download: bool = True,
     overwrite: bool = False,
     check: bool = True,
@@ -136,6 +135,12 @@ def run(
         transformation: the transformation of Martin-Quinn scores, "jcs2024"
             (as in the 2024 release of the scores) or "paper" (Epstein et
             al.'s of 2007; see `politics.justices`). Defaults to "jcs2024".
+        use_published: whether to use the published score of a judge (or a
+            justice's term) where it differs from the computed one by more
+            than `published_threshold` (see `verify.use_published`). The
+            checks still compare the computed scores. Defaults to `False`.
+        published_threshold: the largest difference from a published score
+            that keeps the computed score. Defaults to 0.05.
         download: whether to download the files that are missing. Defaults
             to `True`.
         overwrite: whether to download the files again even if they are
@@ -155,7 +160,7 @@ def run(
         sources.download(
             _INPUTS, folder, overwrite = overwrite, session = session)
         optional = ['duty_stations'] + ([] if martin_quinn else ['martin_quinn'])
-        optional += list(_PUBLISHED) if check else []
+        optional += list(_PUBLISHED) if check or use_published else []
         for kind in optional:
             try:
                 sources.download(
@@ -165,6 +170,22 @@ def run(
     scored, terms = compute(
         files, senators = senators, martin_quinn = martin_quinn,
         transformation = transformation)
+    checks = _checks(files, scored, terms) if check or use_published else {}
+    if use_published:
+        if not checks:
+            logger.warning(
+                'there are no published scores in %s, so every score is '
+                'computed', files['jcs_judges'].parent)
+        scored, terms = verify.use_published(
+            scored, terms, checks, published_threshold)
+        replaced = int((_since(scored, start_year)['jcs_source'] != (
+            'computed')).sum())
+        logger.info(
+            'used the published scores of %d appointments that differ by '
+            'more than %.2f', replaced, published_threshold)
+    else:
+        scored, terms = verify.mark_computed(scored), verify.mark_computed(
+            terms)
     sheets: dict[str, pd.DataFrame] = {
         'Scores': _since(scored, start_year),
         # A term begins in October, so the one sitting in January of the
@@ -173,7 +194,6 @@ def run(
             terms[terms['term'] >= start_year - 1] if not terms.empty
             else terms)}
     if check:
-        checks = _checks(files, scored, terms)
         sheets['Verification'] = verify.summarize(checks)
         names = {
             'circuit_judges': 'Circuit check',
@@ -189,6 +209,9 @@ def run(
     settings = {
         'start_year': start_year, 'senators': senators,
         'transformation': transformation,
+        'use_published': (
+            f'{use_published} (threshold {published_threshold})'
+            if use_published else use_published),
         'appointments': len(sheets['Scores'])}
     path = export.write(output, sheets, settings)
     missing = int(sheets['Scores']['jcs'].isna().sum())
