@@ -59,7 +59,7 @@ def test_appointments(table, career, senate, terms) -> None:
     assert _row(scored, 4)['state_source'] == 'national court'
     # Renominated by President Bush, Judge Gray gets Virginia's Republicans.
     assert _row(scored, 8)['jcs'] == pytest.approx(0.35)
-    # Judge Old left the bench before 1950.
+    # Judge Old left the bench before 1953.
     assert 7 not in scored['nid'].tolist()
 
 

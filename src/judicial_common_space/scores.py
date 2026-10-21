@@ -13,8 +13,8 @@ scale (see `politics.justices`).
 So a judge's score belongs to an appointment: a district judge who is
 elevated to a court of appeals is scored again, by the president and
 senators of the second appointment. `appointments` scores every appointment
-to a federal court of a judge who served on it in or after a year (1950 by
-default). A judge moved to a court without an appointment (as when the
+to a federal court of a judge who served on it in or after a year (by
+default 1953, the first year of Epstein et al.'s study). A judge moved to a court without an appointment (as when the
 Eleventh Circuit was made from the Fifth) keeps the score of the
 appointment before.
 
@@ -78,7 +78,7 @@ def appointments(
         senate: the scores of senators and presidents.
         start_year: the first year of service to include: an appointment is
             included if the judge was serving on the court in that year or
-            later. Defaults to 1950. `None` includes every appointment.
+            later. Defaults to 1953. `None` includes every appointment.
         senators: "congress" or "date": which senators count (see
             `politics.Senate.senators`). Defaults to "congress", as in the
             published Judicial Common Space scores.
@@ -138,7 +138,7 @@ def justices(
     Args:
         terms: the justices' scores in each term (see `politics.justices`).
         table: the appointments (see `fjc.appointments`).
-        start_year: the first term to include. Defaults to 1950.
+        start_year: the first term to include. Defaults to 1953.
 
     Returns:
         A table with "term", "justiceName", "judge", "nid", "jid", "title"

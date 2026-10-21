@@ -15,10 +15,11 @@
 ## What is judicial_common_space?
 
 `judicial_common_space` computes the Judicial Common Space (JCS) score of
-every appointment of a federal judge who has served since 1950 (or any year
-you choose), following Epstein, Martin, Segal, and Westerland, ["The Judicial
-Common Space,"](https://epstein.wustl.edu/s/JCS.pdf) 23 *J.L. Econ. & Org.*
-303 (2007). It saves them in a spreadsheet with each judge's name, the
+every appointment of a federal judge who has served since 1953 (the first
+year of the original study, or any year you choose), following Epstein,
+Martin, Segal, and Westerland, ["The Judicial Common
+Space,"](https://epstein.wustl.edu/s/JCS.pdf) 23 *J.L. Econ. & Org.* 303
+(2007). It saves them in a spreadsheet with each judge's name, the
 Federal Judicial Center's two numbers for the judge (`nid` and `jid`), and
 the judge's score for each appointment, and checks them against the
 published scores.
@@ -127,13 +128,13 @@ Or from Python:
 ```python
 import judicial_common_space
 
-judicial_common_space.run('judicial_common_space.xlsx', start_year = 1950)
+judicial_common_space.run('judicial_common_space.xlsx', start_year = 1953)
 ```
 
 | Option | Default | Description |
 | --- | --- | --- |
 | `--output` | `judicial_common_space.xlsx` | Where to save the spreadsheet. |
-| `--start-year` | `1950` | Include judges who served on a court in this year or later. |
+| `--start-year` | `1953` | Include judges who served on a court in this year or later, and the justices' terms from the one sitting in January of that year. The default is the first year of the original study, which covered 1953 through 2000; the published scores now run through 2024, and these through the latest data. |
 | `--senators` | `congress` | Which senators count: `congress` (as the published scores do) or `date` (those holding the seats on the day). |
 | `--transformation` | `jcs2024` | How Martin-Quinn scores are put on the scale: `jcs2024` or `paper`. |
 | `--martin-quinn` | the data folder's | The Martin-Quinn `justices.csv`, if it cannot be downloaded. The Martin-Quinn site checks for automated browsers, so if the download fails, save the file from its page and pass its path (or put it in the data folder's `politics` folder). |

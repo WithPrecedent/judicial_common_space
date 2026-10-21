@@ -100,7 +100,10 @@ def run(
         folder: the data folder. Defaults to `None`, in which case
             `utilities.data_folder()` is used.
         start_year: the first year of service to include (see
-            `scores.appointments`). Defaults to 1950.
+            `scores.appointments`). Defaults to 1953, the first year of
+            Epstein et al.'s study. The justices' terms begin with the one
+            that was sitting in January of that year (the 1952 term, for
+            1953), as the study's do.
         senators: which senators count, "congress" or "date" (see
             `politics.Senate.senators`). Defaults to "congress", as in the
             published Judicial Common Space scores.
@@ -141,8 +144,11 @@ def run(
         transformation = transformation)
     sheets: dict[str, pd.DataFrame] = {
         'Scores': _since(scored, start_year),
+        # A term begins in October, so the one sitting in January of the
+        # first year began the year before.
         'Justices': (
-            terms[terms['term'] >= start_year] if not terms.empty else terms)}
+            terms[terms['term'] >= start_year - 1] if not terms.empty
+            else terms)}
     if check:
         checks = _checks(files, scored, terms)
         sheets['Verification'] = verify.summarize(checks)

@@ -35,7 +35,8 @@ Contents:
     _PRESIDENTS: Voteview's number (ICPSR) for each president since McKinley,
         by the name that the Federal Judicial Center gives the president.
     _SPLIT_FIFTH: the day the Fifth Circuit was divided.
-    _START_YEAR: the first year of service that is included by default.
+    _START_YEAR: the first year of service that is included by default: 1953,
+        the first year of Epstein et al.'s study.
     _STATES: the names of the states and territories, by their postal codes.
     _TERRITORIES: the places with federal courts that have no senators.
     _TIMEOUT: the number of seconds to wait for a server.
@@ -177,7 +178,8 @@ _PRESIDENTS: dict[str, int] = {
     'Donald J. Trump': 99912,
     'Joseph R. Biden': 99913}
 _SPLIT_FIFTH: str = '1981-10-01'
-_START_YEAR: int = 1950
+# Epstein et al. scored the judges and justices who served from 1953.
+_START_YEAR: int = 1953
 _STATES: dict[str, str] = {
     'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
     'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut',

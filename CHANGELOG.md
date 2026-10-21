@@ -7,7 +7,8 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 
 * Computed the Judicial Common Space score of every appointment of a federal
-  judge who served since 1950, from the Federal Judicial Center's
+  judge who served since 1953 (the first year of Epstein et al.'s study),
+  from the Federal Judicial Center's
   Biographical Directory, Voteview's DW-NOMINATE scores, the dates of
   senators' service, and the Martin-Quinn scores
 * Saved the scores in a spreadsheet with both of the center's numbers for

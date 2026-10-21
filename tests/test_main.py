@@ -27,6 +27,17 @@ def test_run(data_folder, tmp_path) -> None:
     assert 'senators: congress' in sheets['About']['About'].tolist()
 
 
+def test_run_starts_with_the_term_sitting_in_january(
+    data_folder,
+    tmp_path) -> None:
+    path = judicial_common_space.run(
+        tmp_path / 'scores.xlsx', folder = data_folder, download = False,
+        start_year = 1973, check = False)
+    justices = pd.read_excel(path, sheet_name = 'Justices')
+    # The 1972 term was sitting in January 1973; the 1971 term was not.
+    assert justices['term'].tolist() == [1972, 1985, 1986, 1987]
+
+
 def test_run_without_martin_quinn(data_folder, tmp_path) -> None:
     sources.paths(data_folder)['martin_quinn'].unlink()
     path = judicial_common_space.run(
