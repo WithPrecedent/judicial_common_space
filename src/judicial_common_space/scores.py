@@ -43,8 +43,8 @@ _COLUMNS: tuple[str, ...] = (
     'judge', 'nid', 'jid', 'court_type', 'court', 'circuit', 'title',
     'sequence', 'president', 'party', 'nomination_date', 'recess_date',
     'commission_date', 'termination_date', 'appointment_date', 'congress',
-    'reassigned', 'home_state', 'state_source', 'method', 'senators',
-    'president_score', 'jcs')
+    'reassigned', 'home_state', 'state_source', 'duty_station', 'method',
+    'senators', 'president_score', 'jcs')
 
 
 def appointments(
@@ -65,14 +65,17 @@ def appointments(
     | `nomination_date`, `recess_date`, `commission_date`, `termination_date` | Dates of the appointment and of the end of the judge's service on the court. |
     | `appointment_date`, `congress` | The day that the senators and president are found on (see `fjc.appointments`), and the Congress that sat then. |
     | `reassigned` | Whether the judge was moved to the court without an appointment, and so keeps the score of the appointment before. |
-    | `home_state`, `state_source` | The state that the judge was appointed from, and how it was found (see `states.home_state`). |
+    | `home_state`, `state_source` | The state that the judge was appointed from (a postal code), and how it was found (see `states.home_state`). |
+    | `duty_station` | For a judge of a court of appeals, the state where Wikipedia says the judge sat (see `stations`), which is used for `home_state` only when the judge's career shows none. |
     | `method` | How the score was found: "home-state senator", "home-state senators", "president", or "Martin-Quinn". |
     | `senators` | The senators whose scores were used, separated by semicolons. |
     | `president_score` | The president's score. |
     | `jcs` | The Judicial Common Space score. A justice's score is that of the first term of the appointment (`justices` has every term). Missing if there is no score (as for Herbert Hoover, whom Voteview does not score, or a justice without Martin-Quinn scores). |
 
     Args:
-        table: the appointments (see `fjc.appointments`).
+        table: the appointments (see `fjc.appointments`), with the states of
+            the judges' duty stations as "duty_station" if they are known
+            (see `stations.match`).
         careers: the entries of each judge's career, by the judge's "nid"
             (see `fjc.careers`).
         senate: the scores of senators and presidents.

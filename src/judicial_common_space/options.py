@@ -43,6 +43,12 @@ Contents:
     _USER_AGENT: how judicial_common_space identifies itself to servers.
     _VOTEVIEW_FILE: name of Voteview's file of the ideology of every member.
     _VOTEVIEW_URL: address of the folder with that file.
+    _WIKIPEDIA_API: address of Wikipedia's API, which returns the source
+        text (wikitext) of articles.
+    _WIKIPEDIA_FILE: name of the file of the articles on the courts of
+        appeals, which have the judges' duty stations.
+    _WIKIPEDIA_PAGES: the title of the article on each regional court of
+        appeals, by its number.
 
 """
 
@@ -206,3 +212,13 @@ _USER_AGENT: str = (
     '(https://github.com/WithPrecedent/judicial_common_space)')
 _VOTEVIEW_FILE: str = 'HSall_members.csv'
 _VOTEVIEW_URL: str = 'https://voteview.com/static/data/out/members/'
+_WIKIPEDIA_API: str = 'https://en.wikipedia.org/w/api.php'
+_WIKIPEDIA_FILE: str = 'circuit_duty_stations.json'
+# The articles on the regional courts of appeals, which list every judge
+# with the judge's state (or, for sitting judges, duty station).
+_WIKIPEDIA_PAGES: dict[int, str] = {
+    number: f'United States Court of Appeals for the {words} Circuit'
+    for number, words in (
+        (1, 'First'), (2, 'Second'), (3, 'Third'), (4, 'Fourth'),
+        (5, 'Fifth'), (6, 'Sixth'), (7, 'Seventh'), (8, 'Eighth'),
+        (9, 'Ninth'), (10, 'Tenth'), (11, 'Eleventh'))}

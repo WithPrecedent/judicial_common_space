@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import io
+import json
 import zipfile
 
 import pytest
@@ -28,9 +29,23 @@ class FakeSession:
         self.pages = pages
         self.requested: list[str] = []
 
-    def get(self, url: str, timeout: int = 0) -> FakeResponse:
-        """Returns the page or file at `url`, or the address itself."""
+    def get(
+        self,
+        url: str,
+        params: dict[str, object] | None = None,
+        timeout: int = 0) -> FakeResponse:
+        """Returns the page or file at `url`, or the address itself.
+
+        A request of Wikipedia's API returns an article whose source text is
+        its title.
+
+        """
         self.requested.append(url)
+        if url == options._WIKIPEDIA_API and params:
+            article = {
+                'title': params['page'], 'revid': 7,
+                'wikitext': f"text of {params['page']}"}
+            return FakeResponse(json.dumps({'parse': article}).encode())
         return FakeResponse(self.pages.get(url, url.encode()))
 
 
@@ -78,6 +93,13 @@ def test_download(session, tmp_path) -> None:
     assert found['jcs_judges'].read_text() == 'name,jcs\n'
     assert found['jcs_justices'].read_text() == 'term,jcs\n'
     assert found['jcs_medians'].read_text() == 'year\n'
+    saved = json.loads(found['duty_stations'].read_text(encoding = 'utf-8'))
+    assert sorted(saved['pages'], key = int) == [str(n) for n in range(1, 12)]
+    fourth = saved['pages']['4']
+    assert fourth['title'] == (
+        'United States Court of Appeals for the Fourth Circuit')
+    assert fourth['revid'] == 7
+    assert fourth['wikitext'] == f"text of {fourth['title']}"
     # Files that are there are not downloaded again.
     session.requested.clear()
     sources.download('congress', tmp_path, session = session)
@@ -93,3 +115,10 @@ def test_download_errors(session, tmp_path) -> None:
     session.pages[options._MQ_PAGE] = b'<p>No links</p>'
     with pytest.raises(ValueError, match = 'download the file in a browser'):
         sources.download('martin_quinn', tmp_path, session = session)
+
+    def missing(url, params = None, timeout = 0):
+        return FakeResponse(b'{"error": {"code": "missingtitle"}}')
+
+    session.get = missing
+    with pytest.raises(ValueError, match = 'no article titled'):
+        sources.download('duty_stations', tmp_path, session = session)

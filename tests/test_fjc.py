@@ -50,5 +50,5 @@ def test_appointments_needs_columns(service, demographics) -> None:
 
 def test_careers(career) -> None:
     found = fjc.careers(career)
-    assert sorted(found) == [2, 3, 8]
+    assert sorted(found) == [2, 3, 8, 9]
     assert found[2][1] == 'Private practice, Atlanta, Georgia, 1960-1979'

@@ -42,16 +42,18 @@ _ABOUT: tuple[str, ...] = (
         'Home states: district judges by the court; judges of the courts of '
         'appeals by an earlier district court in the circuit, then by their '
         'careers when appointed (Federal Judicial Center), then by their '
-        'birth states. Judges of the District of Columbia Circuit, the '
-        "Federal Circuit, and other national courts get the president's "
-        'score.'),
+        'duty stations (Wikipedia), then by their birth states. Judges of '
+        'the District of Columbia Circuit, the Federal Circuit, and other '
+        "national courts get the president's score."),
     '',
     (
         'Sources: Federal Judicial Center, Biographical Directory of Article '
         'III Federal Judges (nid and jid are its numbers for each judge); '
         'Voteview, DW-NOMINATE scores of members of Congress and presidents '
         "(nominate_dim1); congress-legislators (dates of senators' service); "
-        "Martin & Quinn, justices' scores; for verification, Epstein et al., "
+        "Martin & Quinn, justices' scores; Wikipedia, the articles on the "
+        'courts of appeals (duty stations; CC BY-SA); for verification, '
+        'Epstein et al., '
         'Judicial Common Space scores (2024), and Christina L. Boyd, Federal '
         'District Court Judge Ideology Data (2025).'))
 
@@ -88,8 +90,13 @@ def write(
             sheet = writer.sheets[name]
             sheet.freeze_panes = 'A2'
             for number, column in enumerate(table.columns, start = 1):
-                values = table[column].astype(str).str.len()
-                width = max(len(str(column)), int(values.quantile(0.9))) + 2
+                # A column with no values (as the district judges' duty
+                # stations) is as wide as its name.
+                lengths = [
+                    0 if pd.isna(value) else len(str(value))
+                    for value in table[column]]
+                widest = int(pd.Series(lengths).quantile(0.9)) if lengths else 0
+                width = max(len(str(column)), widest) + 2
                 letter = sheet.cell(row = 1, column = number).column_letter
                 sheet.column_dimensions[letter].width = min(width, 60)
         pd.DataFrame({'About': about}).to_excel(

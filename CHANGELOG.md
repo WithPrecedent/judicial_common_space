@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file.
 * Checked the scores against the published JCS scores of circuit judges and
   justices and Christina Boyd's scores of district judges
 * Added the `judicial-common-space` command
+* Found the home states of circuit judges whose careers show none from their
+  duty stations in Wikipedia's articles on the courts of appeals, and added
+  the `duty_station` column
 
 ## 0.1.0
     Initial Commit

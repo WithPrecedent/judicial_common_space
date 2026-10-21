@@ -24,7 +24,17 @@ from typing import Any
 
 import pandas as pd
 
-from . import export, fjc, options, politics, scores, sources, utilities, verify
+from . import (
+    export,
+    fjc,
+    options,
+    politics,
+    scores,
+    sources,
+    stations,
+    utilities,
+    verify,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -55,11 +65,24 @@ def compute(
     Returns:
         The scores of every appointment (see `scores.appointments`), and of
             every justice in every term (see `scores.justices`), which is
-            empty if there are no Martin-Quinn scores.
+            empty if there are no Martin-Quinn scores. Without the file of
+            duty stations, a judge whose career shows no state has the
+            judge's birth state.
 
     """
     table = fjc.appointments(files['service'], files['demographics'])
     careers = fjc.careers(files['career'])
+    found: dict[tuple[int, str], str] = {}
+    if files['duty_stations'].is_file():
+        found = stations.match(
+            table, stations.duty_stations(files['duty_stations']))
+    else:
+        logger.warning(
+            'there are no duty stations at %s, so judges whose careers show '
+            'no state have their birth states', files['duty_stations'])
+    table['duty_station'] = [
+        found.get((nid, court)) for nid, court in zip(
+            table['nid'], table['court'], strict = True)]
     senate = politics.Senate.from_files(
         files['congress'],
         [files['legislators_historical'], files['legislators_current']])
@@ -131,7 +154,7 @@ def run(
         session = utilities.open_session(session)
         sources.download(
             _INPUTS, folder, overwrite = overwrite, session = session)
-        optional = [] if martin_quinn else ['martin_quinn']
+        optional = ['duty_stations'] + ([] if martin_quinn else ['martin_quinn'])
         optional += list(_PUBLISHED) if check else []
         for kind in optional:
             try:

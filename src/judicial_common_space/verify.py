@@ -54,8 +54,8 @@ _CORRECTIONS: dict[tuple[str, int], tuple[str, int]] = {
 _SAME: float = 0.0005
 _SUFFIXES: frozenset[str] = frozenset({'jr', 'sr', 'i', 'ii', 'iii', 'iv'})
 _DETAILS: tuple[str, ...] = (
-    'home_state', 'state_source', 'method', 'senators', 'president',
-    'appointment_date')
+    'home_state', 'state_source', 'duty_station', 'method', 'senators',
+    'president', 'appointment_date')
 
 
 def circuit_judges(

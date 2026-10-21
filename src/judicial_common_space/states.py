@@ -16,7 +16,12 @@ several states. Its place is found from the judge's record, in this order:
    or else the state of a city or school that it names without one (as
    "Harvard Law School"; see `options._PLACES`). Only states of the circuit
    count.
-3. The state where the judge was born, if it is in the circuit.
+3. The state of the judge's duty station, as Wikipedia's article on the
+   court gives it (see `stations`), if it is in the circuit. It comes after
+   the judge's career because it is where the judge sat, which is sometimes
+   not where the judge came from (Alfred Goodwin came from Oregon's
+   district court and sat in California).
+4. The state where the judge was born, if it is in the circuit.
 
 Judges of the District of Columbia Circuit have the District of Columbia,
 which has no senators, so they get the score of the president, as all but
@@ -132,14 +137,16 @@ def home_state(
     """Returns the state that a judge was appointed from, and how it was found.
 
     Args:
-        appointment: a row of `fjc.appointments`.
+        appointment: a row of `fjc.appointments`, with the state of the
+            judge's duty station as "duty_station" if it is known (see
+            `stations.match`).
         career: the entries of the judge's career (see `fjc.careers`).
 
     Returns:
         The postal code of the state (`None` if there is none), and how it
             was found: "court" (the court's name), "earlier district court",
-            "career", "birth state", "national court", "Supreme Court", or
-            "not found".
+            "career", "duty station", "birth state", "national court",
+            "Supreme Court", or "not found".
 
     """
     court = str(appointment['court'])
@@ -170,6 +177,9 @@ def home_state(
     state = career_state(career, year, allowed)
     if state:
         return state, 'career'
+    station = str(appointment.get('duty_station') or '')
+    if station in allowed:
+        return station, 'duty station'
     birth = str(appointment.get('birth_state') or '')
     if birth in allowed:
         return birth, 'birth state'

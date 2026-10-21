@@ -99,6 +99,24 @@ def test_home_state_of_judges_of_courts_of_appeals() -> None:
         None, 'not found')
 
 
+def test_home_state_from_duty_stations() -> None:
+    fourth = 'U.S. Court of Appeals for the Fourth Circuit'
+    washington = ['Office of Legal Counsel, U.S. Department of Justice, 1989-']
+    # The duty station comes after the career and before the birth state.
+    sat = _appointment(fourth, duty_station = 'VA', birth_state = 'NC')
+    assert states.home_state(sat, washington) == ('VA', 'duty station')
+    richmond = ['Private practice, Charlotte, North Carolina, 1980-2000']
+    assert states.home_state(sat, richmond) == ('NC', 'career')
+    # A duty station outside the circuit does not count.
+    elsewhere = _appointment(fourth, duty_station = 'CA', birth_state = 'NC')
+    assert states.home_state(elsewhere, washington) == ('NC', 'birth state')
+    # Nor does it count for the District of Columbia Circuit.
+    dc = _appointment(
+        'U.S. Court of Appeals for the District of Columbia Circuit',
+        duty_station = 'VA')
+    assert states.home_state(dc, washington) == ('DC', 'court')
+
+
 def test_home_state_before_the_eleventh_circuit() -> None:
     fifth = 'U.S. Court of Appeals for the Fifth Circuit'
     career = ['Private practice, Atlanta, Georgia, 1960-1979']

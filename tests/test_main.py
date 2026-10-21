@@ -20,6 +20,10 @@ def test_run(data_folder, tmp_path) -> None:
     scores = sheets['Scores']
     assert {'judge', 'nid', 'jid', 'jcs'} <= set(scores.columns)
     assert 7 not in scores['nid'].tolist()
+    lutt = scores.query('nid == 9').iloc[0]
+    assert (lutt['home_state'], lutt['state_source']) == ('VA', 'duty station')
+    assert lutt['duty_station'] == 'VA'
+    assert lutt['jcs'] == pytest.approx(0.3)
     summary = sheets['Verification'].set_index('check')
     assert summary.loc['circuit_judges', 'found'] == 4
     assert summary.loc['circuit_judges', 'same'] == 3
@@ -38,15 +42,23 @@ def test_run_starts_with_the_term_sitting_in_january(
     assert justices['term'].tolist() == [1972, 1985, 1986, 1987]
 
 
-def test_run_without_martin_quinn(data_folder, tmp_path) -> None:
-    sources.paths(data_folder)['martin_quinn'].unlink()
+def test_run_without_optional_files(data_folder, tmp_path) -> None:
+    found = sources.paths(data_folder)
+    found['martin_quinn'].unlink()
+    found['duty_stations'].unlink()
     path = judicial_common_space.run(
         tmp_path / 'scores.xlsx', folder = data_folder, download = False,
         check = False)
     sheets = pd.read_excel(path, sheet_name = None)
     assert list(sheets) == ['Scores', 'About']
-    justices = sheets['Scores'].query('court_type == "Supreme Court"')
+    scores = sheets['Scores']
+    justices = scores.query('court_type == "Supreme Court"')
     assert justices['jcs'].isna().all()
+    # Without the duty station, Judge Lutt has no state in the circuit, so
+    # gets the president's score.
+    lutt = scores.query('nid == 9').iloc[0]
+    assert lutt['state_source'] == 'not found'
+    assert lutt['jcs'] == pytest.approx(0.557)
 
 
 def test_cli(data_folder, tmp_path) -> None:

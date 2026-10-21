@@ -94,7 +94,14 @@ def service() -> pd.DataFrame:
             'William J. Clinton', 'Democratic', recess = '2000-12-27',
             nomination = '2001-05-09', commission = '2001-07-20',
             reappointing = 'George W. Bush',
-            reappointing_party = 'Republican')]
+            reappointing_party = 'Republican'),
+        # Judge Lutt's career was in Washington, D.C., so only the duty
+        # station shows the state.
+        _service_row(
+            9, 1, 'Lutt, Mike', 'U.S. Court of Appeals',
+            'U.S. Court of Appeals for the Fourth Circuit',
+            'George H.W. Bush', 'Republican', nomination = '1991-04-23',
+            commission = '1991-08-02')]
     return pd.DataFrame(rows, columns = SERVICE_COLUMNS)
 
 
@@ -109,7 +116,8 @@ def demographics() -> pd.DataFrame:
         (5, 105, 'Smith', 'John', 'Paul', '', 'WI'),
         (6, 106, 'Green', 'Gale', '', '', 'CO'),
         (7, 107, 'Old', 'Otto', '', '', 'MD'),
-        (8, 108, 'Gray', 'Gil', '', '', 'NY')]
+        (8, 108, 'Gray', 'Gil', '', '', 'NY'),
+        (9, 109, 'Lutt', 'Mike', '', '', 'TX')]
     return pd.DataFrame(
         [[str(cell) for cell in person] for person in people],
         columns = [
@@ -127,7 +135,9 @@ def career() -> pd.DataFrame:
         (2, 'Visiting professor, Tulane Law School, 1975'),
         (3, 'Private practice, Washington, D.C., 1970-1985'),
         (8, 'Private practice, Richmond, Virginia, 1980-2000'),
-        (8, 'Adjunct professor, Georgetown University Law Center, 1995-')]
+        (8, 'Adjunct professor, Georgetown University Law Center, 1995-'),
+        (9, 'Assistant counsel, White House, 1981-1982'),
+        (9, 'Office of Legal Counsel, U.S. Department of Justice, 1989-1991')]
     return pd.DataFrame(
         [(str(nid), str(number), text)
          for number, (nid, text) in enumerate(entries, start = 1)],
@@ -171,6 +181,11 @@ def members() -> pd.DataFrame:
         _member(104, 'Senate', 7, 'CO', 200, 'CAMPBELL, Ben', 'C000077', 0.2),
         _member(104, 'President', 99909, 'USA', 100, 'CLINTON, Bill', None,
                 -0.438),
+        _member(102, 'Senate', 8, 'VA', 200, 'WARNER, John', 'W000154', 0.3),
+        _member(102, 'Senate', 10, 'VA', 100, 'ROBB, Charles', 'R000309',
+                -0.1),
+        _member(102, 'President', 99908, 'USA', 200, 'BUSH, George H. W.',
+                None, 0.557),
         _member(107, 'Senate', 8, 'VA', 200, 'WARNER, John', 'W000154', 0.3),
         _member(107, 'Senate', 9, 'VA', 200, 'ALLEN, George', 'A000121', 0.4),
         _member(107, 'President', 99910, 'USA', 200, 'BUSH, George W.', None,
@@ -203,6 +218,7 @@ def legislators() -> list[dict[str, object]]:
              {'start': '1995-03-03', 'end': '1999-01-03',
               'party': 'Republican'}]),
         senator('W000154', 'VA', '1979-01-02', '2009-01-03', 'Republican'),
+        senator('R000309', 'VA', '1989-01-03', '2001-01-03', 'Democrat'),
         senator('A000121', 'VA', '2001-01-03', '2007-01-03', 'Republican')]
 
 
@@ -240,6 +256,15 @@ def data_folder(
         json.dumps(legislators), encoding = 'utf-8')
     found['legislators_current'].write_text('[]', encoding = 'utf-8')
     martin_quinn.to_csv(found['martin_quinn'], index = False)
+    found['duty_stations'].write_text(json.dumps({'pages': {'4': {
+        'title': 'United States Court of Appeals for the Fourth Circuit',
+        'revid': 1,
+        'wikitext': (
+            '{{U.S. judgeship row Former\n'
+            ' | name         = {{sortname|Mike|Lutt}}\n'
+            ' | state        = [[Virginia|VA]]\n'
+            ' | term         = 1991–2006\n'
+            '}}\n')}}}), encoding = 'utf-8')
     pd.DataFrame({
         'name': ['Doe, Jane', 'Roe, Richard', 'Roe, Richard', 'Poe, Edgar'],
         'circuit': [4, 5, 11, 12],

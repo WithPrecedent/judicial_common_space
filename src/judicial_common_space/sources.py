@@ -6,6 +6,7 @@
 | `congress` | "HSall_members.csv": the DW-NOMINATE scores of every member of every Congress and of every president. | "politics" | https://voteview.com/data |
 | `legislators_historical`, `legislators_current` | The dates that every senator served, with the senator's party on each day. | "politics" | https://github.com/unitedstates/congress-legislators |
 | `martin_quinn` | "justices.csv": each justice's Martin-Quinn score in each term. | "politics" | https://mqscores.wustl.edu/measures.php |
+| `duty_stations` | "circuit_duty_stations.json": the source text of Wikipedia's article on each regional court of appeals, which lists every judge with the judge's state or duty station (see `stations`). | "judges" | https://en.wikipedia.org (through its API) |
 | `jcs_judges`, `jcs_justices`, `jcs_medians` | The published Judicial Common Space scores of the judges of the courts of appeals and the justices, and the medians of each year. | "jcs" | https://epstein.wustl.edu/jcs |
 | `boyd` | Christina Boyd's scores of district judges, made in the same way. | "jcs" | https://sites.wustl.edu/clboyd/research |
 
@@ -25,6 +26,7 @@ Contents:
 
 from __future__ import annotations
 
+import json
 import logging
 import pathlib
 import re
@@ -41,12 +43,13 @@ _NAMES: dict[str, str] = {
     'congress': options._VOTEVIEW_FILE,
     **options._LEGISLATORS_FILES,
     'martin_quinn': options._MQ_FILE,
+    'duty_stations': options._WIKIPEDIA_FILE,
     'jcs_judges': 'judges.csv',
     'jcs_justices': 'justices.csv',
     'jcs_medians': 'medians.csv',
     'boyd': 'boyd_district_judges.csv'}
 _FOLDERS: dict[str, str] = {
-    **dict.fromkeys(options._FJC_FILES, 'judges'),
+    **dict.fromkeys([*options._FJC_FILES, 'duty_stations'], 'judges'),
     **dict.fromkeys(
         ['congress', *options._LEGISLATORS_FILES, 'martin_quinn'],
         'politics'),
@@ -116,6 +119,8 @@ def download(
         elif kind == 'boyd':
             utilities.download_file(
                 options._BOYD_URL, path, overwrite = True, session = session)
+        elif kind == 'duty_stations':
+            _download_wikipedia(path, session)
         else:
             archive_needed = True
     if archive_needed:
@@ -141,6 +146,47 @@ def paths(folder: pathlib.Path | str | None = None) -> dict[str, pathlib.Path]:
 
 
 """ Private Functions """
+
+
+def _download_wikipedia(path: pathlib.Path, session: Any) -> None:
+    """Saves the source text of Wikipedia's articles on the courts of appeals.
+
+    Each article (see `options._WIKIPEDIA_PAGES`) is requested from
+    Wikipedia's API, and all of them are saved in one JSON file with the
+    number of the revision that was read, so the file shows which versions
+    the duty stations came from.
+
+    Args:
+        path: where to save the file. Its folder is created if needed.
+        session: an object with a `get` method like a `requests.Session`.
+
+    Raises:
+        requests.HTTPError: if an article cannot be downloaded.
+        ValueError: if the API does not return an article.
+
+    """
+    pages = {}
+    for number, title in options._WIKIPEDIA_PAGES.items():
+        response = session.get(
+            options._WIKIPEDIA_API,
+            params = {
+                'action': 'parse', 'page': title, 'prop': 'wikitext|revid',
+                'redirects': 1, 'format': 'json', 'formatversion': 2},
+            timeout = options._TIMEOUT)
+        response.raise_for_status()
+        parsed = json.loads(response.text).get('parse')
+        if not parsed:
+            message = f'Wikipedia returned no article titled {title!r}'
+            raise ValueError(message)
+        pages[str(number)] = {
+            'title': parsed.get('title', title),
+            'revid': parsed.get('revid'),
+            'wikitext': parsed['wikitext']}
+    path.parent.mkdir(parents = True, exist_ok = True)
+    path.write_text(
+        json.dumps({'source': options._WIKIPEDIA_API, 'pages': pages}),
+        encoding = 'utf-8')
+    logger.info('downloaded %d Wikipedia articles to %s', len(pages), path)
 
 
 def _link(page: str, name: str, session: Any) -> str:
