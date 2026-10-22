@@ -26,16 +26,10 @@ published scores.
 
 ## Why use judicial_common_space?
 
-The published JCS scores cover the judges of the courts of appeals and the
-justices, with one score per judge and court, and are updated every few
-years. This package:
+This package:
 
 - **Scores every Article III appointment**: district courts, courts of
-  appeals, the Supreme Court, and the national courts (the Court of
-  International Trade and the courts before it).
-- **Scores each appointment separately**, because a judge's score depends
-  on the president and senators of the appointment: a district judge
-  elevated to a court of appeals gets a new score.
+  appeals, and the Supreme Court.
 - **Uses the current sources**, downloaded when needed: the Federal Judicial
   Center's [Biographical Directory of Article III Federal
   Judges](https://www.fjc.gov/history/judges/biographical-directory-article-iii-federal-judges-export),
@@ -97,7 +91,7 @@ that remain are judges whom the published file places in a state that
 neither the center's records nor Wikipedia show (such as Richard Cudahy in
 Illinois and Stephen Trott in Idaho), a few D.C. Circuit judges and the
 Federal Circuit judges who came from the Court of Customs and Patent
-Appeals, which the published file scores differently, and some apparent
+Appeals, which the published file scores differently, and some possible
 slips in the published files. The spreadsheet's check sheets list every
 comparison, and the next section explains every one that differs by more
 than 0.05.
@@ -114,7 +108,7 @@ of the published scores.)
 | Judge | Circuit | Published | Computed | Why |
 | --- | ---: | ---: | ---: | --- |
 | Giles Rich | Fed. | 0.692 | 0.281 | Eisenhower appointed him to the Court of Customs and Patent Appeals, whose judges were moved to the new Federal Circuit in 1982. The published score is Reagan's, as if he were appointed then; the computed one is Eisenhower's. |
-| John Nalbandian | 6th | 0.648 | 0.371 | The computed score is Ohio's Rob Portman's (Nalbandian practiced in Cincinnati, and Wikipedia gives Ohio as his duty station). The published one matches no Ohio senator and is the same as the two Florida judges' of 2019, so it looks like a slip. |
+| John Nalbandian | 6th | 0.648 | 0.371 | The computed score is Ohio's Rob Portman's (Nalbandian practiced in Cincinnati, and Wikipedia gives Ohio as his duty station). The published one matches no Ohio senator and is the same as the two Florida judges' of 2019. |
 | Richard Cudahy | 7th | −0.333 | −0.583 | The published score is Illinois's Adlai Stevenson III's. Cudahy's career and duty station were in Wisconsin. |
 | Stephen Trott | 9th | 0.590 | 0.352 | The published score is Idaho's two senators', where Trott later sat. He came from California. |
 | Jay Bybee | 9th | 0.693 | 0.508 | The published score is George W. Bush's. Bybee taught in Nevada, which is also his duty station, and Nevada's John Ensign was a Republican. |
@@ -299,6 +293,51 @@ and Christina L. Boyd. Please cite them when you use the scores.
 
 This project was generated from [@WithPrecedent](https://github.com/WithPrecedent)'s [![cookiecutter Template](https://img.shields.io/badge/snickerdoodle-bisque?style=for-the-badge&logo=cookiecutter&labelColor=gray)](https://www.github.com/WithPrecedent/snickerdoodle) template.
 
+## Citation
+
+If you use `judicial_common_space` in your research, definitely cite these works:
+
+```bibtex
+@misc{boyd_district_2015,
+  author = {Boyd, Christina L.},
+  title  = {Federal District Court Judge Ideology Data},
+  year   = {2015},
+  url    = {http://cLboyd.net}
+}
+
+@article{epstein_jcs_2007,
+  author  = {Epstein, Lee and Martin, Andrew D. and Segal, Jeffrey A. and Westerland, Chad},
+  title   = {The Judicial Common Space},
+  journal = {Journal of Law, Economics, and Organization},
+  volume  = {23},
+  number  = {2},
+  pages   = {303--325},
+  year    = {2007}
+}
+
+@article{giles_picking_2001,
+  author  = {Giles, Micheal W. and Hettinger, Virginia A. and Peppers, Todd},
+  title   = {Picking Federal Judges: A Note on Policy and Partisan Selection Agendas},
+  journal = {Political Research Quarterly},
+  volume  = {54},
+  number  = {3},
+  pages   = {623--641},
+  year    = {2001}
+}
+```
+And, although my contributions to the JCS project are relatively minor, feel free to cite the repository as well:
+
+```bibtex
+@software{yung_judicial_common_space,
+  author  = {Yung, Corey Rayburn},
+  title   = {judicial_common_space: Judicial Common Space scores for every Article III appointment},
+  version = {0.1.0},
+  year    = {2026},
+  url     = {https://github.com/WithPrecedent/judicial_common_space},
+  license = {Apache-2.0}
+}
+
+```
 ## License
 
 Use of this repository is authorized under the [Apache Software License 2.0](https://www.github.com/WithPrecedent/judicial_common_space/blob/main/LICENSE).

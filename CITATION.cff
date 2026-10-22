@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use judicial_common_space in your research, please cite it as below."
+type: software
+title: "judicial_common_space: Judicial Common Space scores for every Article III appointment"
+abstract: >-
+  A Python package that computes the Judicial Common Space score of every
+  appointment of a federal judge who has served since 1953, following
+  Epstein, Martin, Segal, and Westerland, and checks the scores against the
+  published ones.
+authors:
+  - given-names: Corey Rayburn
+    family-names: Yung
+    email: coreyrayburnyung@gmail.com
+    orcid: "https://orcid.org/0000-0001-6524-9956"
+version: 0.1.0
+date-released: 2026-10-22
+license: Apache-2.0
+repository-code: "https://github.com/WithPrecedent/judicial_common_space"
+url: "https://WithPrecedent.github.io/judicial_common_space"
+keywords:
+  - courts
+  - federal judges
+  - ideal points
+  - judicial common space
+  - law
+  - nominate
+  - open science
+  - reproducibility

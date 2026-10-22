@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.0 - 2026-10-22
+
 * Computed the Judicial Common Space score of every appointment of a federal
   judge who served since 1953 (the first year of Epstein et al.'s study),
   from the Federal Judicial Center's
@@ -25,6 +27,5 @@ All notable changes to this project will be documented in this file.
 * Explained every score that differs from the published ones by more than
   0.05 in the README
 * Removed private names from the modules' documentation
-
-## 0.1.0
-    Initial Commit
+* Added citations to Boyd, Epstein et al., and Giles et al. and a
+  `CITATION.cff`
