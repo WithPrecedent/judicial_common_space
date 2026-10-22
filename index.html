@@ -1,0 +1,2489 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Computes Judicial Common Space scores on demand">
+      
+      
+      
+        <link rel="canonical" href="https://WithPrecedent.github.io/judicial_common_space/">
+      
+      
+      
+        <link rel="next" href="changelog/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Overview - judicial_common_space</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="css/material.css">
+    
+      <link rel="stylesheet" href="css/mkdocstrings.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#judicial_common_space" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="judicial_common_space" class="md-header__button md-logo" aria-label="judicial_common_space" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            judicial_common_space
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/WithPrecedent/judicial_common_space" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    WithPrecedent/judicial_common_space
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="tutorial/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="reference/judicial_common_space/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="contributing/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="judicial_common_space" class="md-nav__button md-logo" aria-label="judicial_common_space" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    judicial_common_space
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/WithPrecedent/judicial_common_space" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    WithPrecedent/judicial_common_space
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="." class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="reference/judicial_common_space/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> judicial_common_space
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> judicial_common_space
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/fjc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> fjc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> main
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/options/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> options
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/politics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> politics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/scores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> scores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/states/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> states
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/stations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> stations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/judicial_common_space/verify/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> verify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code_of_conduct/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code of Conduct
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-judicial_common_space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is judicial_common_space?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-use-judicial_common_space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why use judicial_common_space?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-scores-are-made" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the scores are made
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-well-they-match-the-published-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How well they match the published scores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-they-differ" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where they differ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Where they differ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circuit-judges-and-epstein-et-al" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit judges and Epstein et al.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#district-judges-and-boyd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        District judges and Boyd
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#justices-and-epstein-et-al" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Justices and Epstein et al.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-published-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the published scores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contributing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#similar-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Similar Projects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acknowledgments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Citation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/WithPrecedent/judicial_common_space/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/WithPrecedent/judicial_common_space/raw/master/docs/index.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="judicial_common_space">judicial_common_space<a class="headerlink" href="#judicial_common_space" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td><a href="https://pypi.org/project/judicial-common-space/"><img alt="PyPI Latest Release" src="https://img.shields.io/pypi/v/judicial-common-space.svg?style=for-the-badge&amp;color=cornflowerblue&amp;label=PyPI&amp;logo=PyPI&amp;logoColor=yellow" /></a> <a href="https://github.com/WithPrecedent/judicial_common_space/releases"><img alt="GitHub Latest Release" src="https://img.shields.io/github/v/tag/WithPrecedent/judicial_common_space?style=for-the-badge&amp;color=forestgreen&amp;label=GitHub&amp;logo=github" /></a></td>
+</tr>
+<tr>
+<td>Status</td>
+<td><a href="https://github.com/WithPrecedent/judicial_common_space/actions/workflows/ci.yml?query=branch%3Amain"><img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/WithPrecedent/judicial_common_space/ci.yml?branch=main&amp;style=for-the-badge&amp;color=cadetblue&amp;label=Tests&amp;logo=pytest" /></a> <a href="https://www.repostatus.org/#active"><img alt="Development Status" src="https://img.shields.io/badge/Development-Active-seagreen?style=for-the-badge&amp;logo=git" /></a> <a href="https://pypi.org/project/judicial_common_space/"><img alt="Project Stability" src="https://img.shields.io/pypi/status/judicial-common-space?style=for-the-badge&amp;logo=pypi&amp;label=Stability&amp;logoColor=yellow" /></a></td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td><a href="https://WithPrecedent.github.io/judicial_common_space"><img alt="Hosted By" src="https://img.shields.io/badge/Hosted_by-Github_Pages-blue?style=for-the-badge&amp;color=forestgreen&amp;logo=github" /></a></td>
+</tr>
+<tr>
+<td>Tools</td>
+<td><a href="https://squidfunk.github.io/mkdocs-material/"><img alt="Documentation" src="https://img.shields.io/badge/MkDocs-magenta?style=for-the-badge&amp;color=deepskyblue&amp;logo=markdown&amp;labelColor=gray" /></a> <a href="https://github.com/astral-sh/Ruff"><img alt="Linter" src="https://img.shields.io/endpoint?style=for-the-badge&amp;url=https://raw.githubusercontent.com/charliermarsh/Ruff/main/assets/badge/v2.json" /></a> <a href="https://docs.astral.sh/uv/"><img alt="Dependency Manager" src="https://img.shields.io/badge/uv-mediumpurple?style=for-the-badge&amp;logo=uv&amp;labelColor=gray" /></a> <a href="https://github.com/TezRomacH/python-package-template/blob/master/.pre-commit-config.yaml"><img alt="Pre-commit" src="https://img.shields.io/badge/pre--commit-darkolivegreen?style=for-the-badge&amp;logo=pre-commit&amp;logoColor=white&amp;labelColor=gray" /></a> <a href="https://github.com/features/actions"><img alt="CI" src="https://img.shields.io/badge/GitHub_Actions-forestgreen?style=for-the-badge&amp;logo=githubactions&amp;labelColor=gray&amp;logoColor=white" /></a> <a href="https://editorconfig.org/"><img alt="Editor Settings" src="https://img.shields.io/badge/Editor_Config-paleturquoise?style=for-the-badge&amp;logo=editorconfig&amp;labelColor=gray" /></a> <a href="https://www.github.com/WithPrecedent/snickerdoodle"><img alt="Repository Template" src="https://img.shields.io/badge/snickerdoodle-bisque?style=for-the-badge&amp;logo=cookiecutter&amp;labelColor=gray" /></a> <a href="https://github.com/dependabot"><img alt="Dependency Maintainer" src="https://img.shields.io/badge/dependabot-forestgreen?style=for-the-badge&amp;logo=dependabot&amp;logoColor=white&amp;labelColor=gray" /></a></td>
+</tr>
+<tr>
+<td>Compatibility</td>
+<td><a href="https://pypi.python.org/pypi/judicial_common_space/"><img alt="Compatible Python Versions" src="https://img.shields.io/pypi/pyversions/judicial-common-space?style=for-the-badge&amp;color=cornflowerblue&amp;label=Python&amp;logo=python&amp;logoColor=yellow" /></a> <a href="https://www.linux.org/"><img alt="Linux" src="https://img.shields.io/badge/Linux-lightseagreen?style=for-the-badge&amp;logo=linux&amp;labelColor=gray&amp;logoColor=white" /></a> <a href="https://www.apple.com/macos/"><img alt="MacOS" src="https://img.shields.io/badge/MacOS-antiquewhite?style=for-the-badge&amp;logo=apple&amp;labelColor=gray" /></a>  <a href="https://www.microsoft.com/en-us/windows?r=1"><img alt="Windows" src="https://img.shields.io/badge/Windows-blue?style=for-the-badge" /></a></td>
+</tr>
+<tr>
+<td>Stats</td>
+<td><a href="https://pypi.org/project/judicial-common-space"><img alt="PyPI Download Rate (per month)" src="https://img.shields.io/pypi/dm/judicial-common-space?style=for-the-badge&amp;color=cornflowerblue&amp;label=Downloads%20💾&amp;logo=pypi&amp;logoColor=yellow" /></a> <a href="https://github.com/WithPrecedent/judicial_common_space/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/WithPrecedent/judicial_common_space?style=for-the-badge&amp;color=forestgreen&amp;label=Stars%20⭐&amp;logo=github" /></a> <a href="https://github.com/WithPrecedent/judicial_common_space/graphs/contributors"><img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/WithPrecedent/judicial_common_space?style=for-the-badge&amp;color=forestgreen&amp;label=Contributors%20🙋&amp;logo=github" /></a> <a href="https://github.com/WithPrecedent/judicial_common_space/graphs/contributors"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/WithPrecedent/judicial_common_space?style=for-the-badge&amp;color=forestgreen&amp;label=Issues%20📘&amp;logo=github" /></a> <a href="https://github.com/WithPrecedent/judicial_common_space/forks"><img alt="GitHub Forks" src="https://img.shields.io/github/forks/WithPrecedent/judicial_common_space?style=for-the-badge&amp;color=forestgreen&amp;label=Forks%20🍴&amp;logo=github" /></a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-is-judicial_common_space">What is judicial_common_space?<a class="headerlink" href="#what-is-judicial_common_space" title="Permanent link">&para;</a></h2>
+<p><code>judicial_common_space</code> computes the Judicial Common Space (JCS) score of
+every appointment of a federal judge who has served since 1953 (the first
+year of the original study, or any year you choose), following Epstein,
+Martin, Segal, and Westerland, <a href="https://epstein.wustl.edu/s/JCS.pdf">"The Judicial Common
+Space,"</a> 23 <em>J.L. Econ. &amp; Org.</em> 303
+(2007). It saves them in a spreadsheet with each judge's name, the
+Federal Judicial Center's two numbers for the judge (<code>nid</code> and <code>jid</code>), and
+the judge's score for each appointment, and checks them against the
+published scores.</p>
+<h2 id="why-use-judicial_common_space">Why use judicial_common_space?<a class="headerlink" href="#why-use-judicial_common_space" title="Permanent link">&para;</a></h2>
+<p>This package:</p>
+<ul>
+<li><strong>Scores every Article III appointment</strong>: district courts, courts of
+  appeals, and the Supreme Court.</li>
+<li><strong>Uses the current sources</strong>, downloaded when needed: the Federal Judicial
+  Center's <a href="https://www.fjc.gov/history/judges/biographical-directory-article-iii-federal-judges-export">Biographical Directory of Article III Federal
+  Judges</a>,
+  <a href="https://voteview.com/data">Voteview's</a> DW-NOMINATE scores, the
+  <a href="https://github.com/unitedstates/congress-legislators">congress-legislators</a>
+  dates of senators' service, the <a href="https://mqscores.wustl.edu/measures.php">Martin-Quinn
+  scores</a>, and Wikipedia's articles
+  on the courts of appeals (for circuit judges' duty stations).</li>
+<li><strong>Shows its work</strong>: each row says which state the judge was appointed
+  from, how that was found, and which senators (or the president) the score
+  came from.</li>
+<li><strong>Checks itself</strong> against the published JCS scores of circuit judges and
+  justices and against Christina Boyd's scores of district judges, which are
+  made the same way.</li>
+</ul>
+<h2 id="how-the-scores-are-made">How the scores are made<a class="headerlink" href="#how-the-scores-are-made" title="Permanent link">&para;</a></h2>
+<p>The paper scores the lower courts by the rule of Giles, Hettinger, and
+Peppers (2001), which follows the norm of senatorial courtesy. If a judge is
+appointed from a state where the president and at least one senator are of
+the same party, the judge gets that senator's NOMINATE score, or the mean of
+the senators' scores. Otherwise the judge gets the president's score.
+Justices get their Martin-Quinn score in each term, put on the same scale by
+the paper's arctangent transformation: <code>2/π · arctan(b0 + b1 · MQ)</code>.</p>
+<p>The package applies the rule this way:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Appointment</td>
+<td>Each row of the center's file of federal judicial service. The senators and the president are those of the nomination (or of the recess appointment, if there was no nomination). A judge renominated by a new president after a recess appointment (as Roger Gregory was) is scored by the president who nominated the judge to the Senate. A judge moved to a court without an appointment (as the Fifth Circuit's judges were to the Eleventh in 1981) keeps the score of the appointment before.</td>
+</tr>
+<tr>
+<td>Home state</td>
+<td>A district judge's comes from the court's name. A circuit judge's is the state of a district court in the circuit that the judge served on before; or else of the job the judge held when appointed (or the most recent before), as the center's record of the judge's career names it; or else of the judge's duty station, as Wikipedia's article on the court gives it; or else the judge's birth state, if it is in the circuit. The duty station comes after the career because it is where the judge sat, which is sometimes not where the judge came from, but it agrees with the state from the career for 98.5% of the judges who have both. (The state of the judge whom the appointee replaced, from the center's seat numbers, made the matches worse: a seat changes states about one time in five.) Judges of the District of Columbia Circuit, the Federal Circuit, and the other national courts get the president's score, as they do in the published scores.</td>
+</tr>
+<tr>
+<td>Senators</td>
+<td>By default, every senator from the state who sat in the Congress of the appointment and belonged to the president's party, as the published scores count them (<code>--senators congress</code>). With <code>--senators date</code>, only the senators who held the seats on the day, by their party on that day, which is the rule as the paper states it and closer to Boyd's district scores.</td>
+</tr>
+<tr>
+<td>Scores</td>
+<td>Voteview's <code>nominate_dim1</code> for senators and presidents (one score for each member's whole service).</td>
+</tr>
+<tr>
+<td>Justices</td>
+<td>The arctangent transformation with the coefficients of the 2024 release of the JCS scores (b0 = 0.1934, b1 = 0.6025), recovered from its 782 justice-terms (r = 0.9998), because both scales have changed since the paper estimated b0 = −0.1736 and b1 = 0.461 from the scores of 2005 (<code>--transformation paper</code> uses those). A justice's appointment gets the score of its first term, and the "Justices" sheet has every term.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-well-they-match-the-published-scores">How well they match the published scores<a class="headerlink" href="#how-well-they-match-the-published-scores" title="Permanent link">&para;</a></h2>
+<p>With the default settings, against the <a href="https://epstein.wustl.edu/jcs">JCS 2024
+release</a> and <a href="https://sites.wustl.edu/clboyd/research">Boyd's district court
+scores</a> (through the 118<sup>th</sup>
+Congress):</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th style="text-align: right;">Published</th>
+<th style="text-align: right;">Found</th>
+<th style="text-align: right;">Same (within 0.0005)</th>
+<th style="text-align: right;">Same or within 0.02</th>
+<th style="text-align: right;">Correlation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Circuit judges (JCS 2024)</td>
+<td style="text-align: right;">705</td>
+<td style="text-align: right;">703</td>
+<td style="text-align: right;">88.3%</td>
+<td style="text-align: right;">96.9%</td>
+<td style="text-align: right;">0.998</td>
+</tr>
+<tr>
+<td>District judges (Boyd)</td>
+<td style="text-align: right;">2,615</td>
+<td style="text-align: right;">2,615</td>
+<td style="text-align: right;">83.6%</td>
+<td style="text-align: right;">95.4%</td>
+<td style="text-align: right;">0.998</td>
+</tr>
+<tr>
+<td>Justice-terms (JCS 2024)</td>
+<td style="text-align: right;">782</td>
+<td style="text-align: right;">782</td>
+<td style="text-align: right;">24.9%</td>
+<td style="text-align: right;">99.4%</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+</tbody>
+</table>
+<p>With <code>--senators date</code>, the district judges match Boyd's scores 99.2% of the
+time (within 0.02) and the circuit judges match the JCS scores 93.2% of the
+time, so the two published sources count senators differently.</p>
+<p>Most differences under 0.02 are not errors. Voteview re-estimates the score
+of every member who is still serving whenever it adds a Congress, so judges
+whose senators are still in office (Fetterman, Rick Scott, Hickenlooper, and
+others) drift a little from scores published with an older file. The same is
+true of recent justices in the Martin-Quinn scores. The larger differences
+that remain are judges whom the published file places in a state that
+neither the center's records nor Wikipedia show (such as Richard Cudahy in
+Illinois and Stephen Trott in Idaho), a few D.C. Circuit judges and the
+Federal Circuit judges who came from the Court of Customs and Patent
+Appeals, which the published file scores differently, and some possible
+slips in the published files. The spreadsheet's check sheets list every
+comparison, and the next section explains every one that differs by more
+than 0.05.</p>
+<h2 id="where-they-differ">Where they differ<a class="headerlink" href="#where-they-differ" title="Permanent link">&para;</a></h2>
+<p>These are every judge and justice whose computed score differs from the
+published one by more than 0.05, with the default settings. (The 689 other
+circuit judges, 2,529 district judges, and 780 justice-terms are within 0.05
+of the published scores.)</p>
+<h3 id="circuit-judges-and-epstein-et-al">Circuit judges and Epstein et al.<a class="headerlink" href="#circuit-judges-and-epstein-et-al" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Judge</th>
+<th style="text-align: right;">Circuit</th>
+<th style="text-align: right;">Published</th>
+<th style="text-align: right;">Computed</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Giles Rich</td>
+<td style="text-align: right;">Fed.</td>
+<td style="text-align: right;">0.692</td>
+<td style="text-align: right;">0.281</td>
+<td>Eisenhower appointed him to the Court of Customs and Patent Appeals, whose judges were moved to the new Federal Circuit in 1982. The published score is Reagan's, as if he were appointed then; the computed one is Eisenhower's.</td>
+</tr>
+<tr>
+<td>John Nalbandian</td>
+<td style="text-align: right;">6<sup>th</sup></td>
+<td style="text-align: right;">0.648</td>
+<td style="text-align: right;">0.371</td>
+<td>The computed score is Ohio's Rob Portman's (Nalbandian practiced in Cincinnati, and Wikipedia gives Ohio as his duty station). The published one matches no Ohio senator and is the same as the two Florida judges' of 2019.</td>
+</tr>
+<tr>
+<td>Richard Cudahy</td>
+<td style="text-align: right;">7<sup>th</sup></td>
+<td style="text-align: right;">−0.333</td>
+<td style="text-align: right;">−0.583</td>
+<td>The published score is Illinois's Adlai Stevenson III's. Cudahy's career and duty station were in Wisconsin.</td>
+</tr>
+<tr>
+<td>Stephen Trott</td>
+<td style="text-align: right;">9<sup>th</sup></td>
+<td style="text-align: right;">0.590</td>
+<td style="text-align: right;">0.352</td>
+<td>The published score is Idaho's two senators', where Trott later sat. He came from California.</td>
+</tr>
+<tr>
+<td>Jay Bybee</td>
+<td style="text-align: right;">9<sup>th</sup></td>
+<td style="text-align: right;">0.693</td>
+<td style="text-align: right;">0.508</td>
+<td>The published score is George W. Bush's. Bybee taught in Nevada, which is also his duty station, and Nevada's John Ensign was a Republican.</td>
+</tr>
+<tr>
+<td>Morris Arnold</td>
+<td style="text-align: right;">8<sup>th</sup></td>
+<td style="text-align: right;">0.381</td>
+<td style="text-align: right;">0.557</td>
+<td>Arkansas's two senators were Democrats, so the computed score is the first President Bush's. The published one matches only Arizona's John McCain.</td>
+</tr>
+<tr>
+<td>Karen Henderson</td>
+<td style="text-align: right;">D.C.</td>
+<td style="text-align: right;">0.391</td>
+<td style="text-align: right;">0.557</td>
+<td>The published score is South Carolina's Strom Thurmond's, where she had been a district judge. The published file gives every other D.C. Circuit judge who came from a district court the president's score.</td>
+</tr>
+<tr>
+<td>Luther Swygert</td>
+<td style="text-align: right;">7<sup>th</sup></td>
+<td style="text-align: right;">−0.580</td>
+<td style="text-align: right;">−0.420</td>
+<td>He came from Indiana's district court, so the computed score is Indiana's Vance Hartke's. The published one is Illinois's Paul Douglas's.</td>
+</tr>
+<tr>
+<td>James Browning</td>
+<td style="text-align: right;">9<sup>th</sup></td>
+<td style="text-align: right;">−0.461</td>
+<td style="text-align: right;">−0.311</td>
+<td>The published score is Montana's two senators', where he was born. The computed one is Washington's, from his last job in the circuit before he worked in Washington, D.C.</td>
+</tr>
+<tr>
+<td>Howard Markey</td>
+<td style="text-align: right;">Fed.</td>
+<td style="text-align: right;">0.692</td>
+<td style="text-align: right;">0.552</td>
+<td>As with Rich: Reagan's score in the published file, and Nixon's, who appointed him, here.</td>
+</tr>
+<tr>
+<td>John Hartigan</td>
+<td style="text-align: right;">1<sup>st</sup></td>
+<td style="text-align: right;">−0.299</td>
+<td style="text-align: right;">−0.391</td>
+<td>The published score is the mean of the two senators who held Rhode Island's seats when he was nominated. The computed one counts all four who sat in that Congress (<code>--senators date</code> gives the published score).</td>
+</tr>
+<tr>
+<td>H. Nathan Swaim</td>
+<td style="text-align: right;">7<sup>th</sup></td>
+<td style="text-align: right;">−0.447</td>
+<td style="text-align: right;">−0.374</td>
+<td>The published score is Illinois's two senators'. He came from Indiana, whose senators were Republicans, so the computed score is Truman's.</td>
+</tr>
+<tr>
+<td>Cindy Chung</td>
+<td style="text-align: right;">3<sup>rd</sup></td>
+<td style="text-align: right;">−0.313</td>
+<td style="text-align: right;">−0.245</td>
+<td>The published score is Bob Casey's alone; John Fetterman, who joined the Senate in 2023, was apparently not in the file it was made from.</td>
+</tr>
+<tr>
+<td>Carl McGowan</td>
+<td style="text-align: right;">D.C.</td>
+<td style="text-align: right;">−0.405</td>
+<td style="text-align: right;">−0.472</td>
+<td>The published score matches no senators; the computed one is Kennedy's, as for other D.C. Circuit judges.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="district-judges-and-boyd">District judges and Boyd<a class="headerlink" href="#district-judges-and-boyd" title="Permanent link">&para;</a></h3>
+<p>75 of the 86 district judges who differ by more than 0.05 differ only
+because of how senators are counted. By default, the score counts every
+senator who sat in the Congress of the nomination; Boyd counts the senators
+who held the seats on the day, as <code>--senators date</code> does, which gives every
+one of these judges Boyd's score:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Nominated</th>
+<th style="text-align: right;">Judges</th>
+<th style="text-align: right;">Boyd</th>
+<th style="text-align: right;">Computed</th>
+<th>Senators counted who did not hold the seats that day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alabama</td>
+<td>1938</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.275</td>
+<td style="text-align: right;">−0.336</td>
+<td>Hugo Black (left for the Supreme Court in 1937)</td>
+</tr>
+<tr>
+<td>Alabama</td>
+<td>1945</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.275</td>
+<td style="text-align: right;">−0.177</td>
+<td>John Sparkman and George Swift (joined in 1946)</td>
+</tr>
+<tr>
+<td>Alabama</td>
+<td>2018</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.446</td>
+<td style="text-align: right;">0.518</td>
+<td>Jeff Sessions and Luther Strange (left in 2017 and January 2018)</td>
+</tr>
+<tr>
+<td>Arkansas</td>
+<td>1937</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.302</td>
+<td style="text-align: right;">−0.228</td>
+<td>John E. Miller (joined after the nomination)</td>
+</tr>
+<tr>
+<td>Arkansas</td>
+<td>1977</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.173</td>
+<td style="text-align: right;">−0.246</td>
+<td>Kaneaster Hodges (joined after the nomination)</td>
+</tr>
+<tr>
+<td>Arkansas</td>
+<td>1978</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.378</td>
+<td style="text-align: right;">−0.246</td>
+<td>John McClellan (died in 1977)</td>
+</tr>
+<tr>
+<td>California</td>
+<td>1950</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.374</td>
+<td style="text-align: right;">−0.263</td>
+<td>Sheridan Downey (resigned in 1950), so Boyd has Truman's score</td>
+</tr>
+<tr>
+<td>California</td>
+<td>1964</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.462</td>
+<td style="text-align: right;">−0.341</td>
+<td>Clair Engle (died in 1964)</td>
+</tr>
+<tr>
+<td>California</td>
+<td>2021–2022</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">−0.345</td>
+<td style="text-align: right;">−0.473</td>
+<td>Kamala Harris (left in January 2021)</td>
+</tr>
+<tr>
+<td>California</td>
+<td>2024</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">−0.435</td>
+<td style="text-align: right;">−0.378</td>
+<td>Dianne Feinstein (died in 2023) and Adam Schiff (joined in December 2024)</td>
+</tr>
+<tr>
+<td>Colorado</td>
+<td>1995–1996</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">−0.438</td>
+<td style="text-align: right;">−0.141</td>
+<td>Ben Nighthorse Campbell (a Republican from March 1995), so Boyd has Clinton's score</td>
+</tr>
+<tr>
+<td>Georgia</td>
+<td>1999</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.220</td>
+<td style="text-align: right;">−0.037</td>
+<td>Zell Miller (joined in 2000)</td>
+</tr>
+<tr>
+<td>Indiana</td>
+<td>1943</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.115</td>
+<td style="text-align: right;">−0.248</td>
+<td>Samuel D. Jackson (joined in 1944)</td>
+</tr>
+<tr>
+<td>Kentucky</td>
+<td>1939</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.384</td>
+<td style="text-align: right;">−0.318</td>
+<td>Happy Chandler (joined after the nomination)</td>
+</tr>
+<tr>
+<td>Kentucky</td>
+<td>1946</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.375</td>
+<td style="text-align: right;">−0.281</td>
+<td>Happy Chandler (resigned in 1945)</td>
+</tr>
+<tr>
+<td>Massachusetts</td>
+<td>2014</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">−0.631</td>
+<td style="text-align: right;">−0.519</td>
+<td>John Kerry and Mo Cowan (left in 2013)</td>
+</tr>
+<tr>
+<td>Missouri</td>
+<td>1945</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.258</td>
+<td style="text-align: right;">−0.309</td>
+<td>Harry Truman (left to be vice president)</td>
+</tr>
+<tr>
+<td>New York</td>
+<td>1937–1938</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">−0.243</td>
+<td style="text-align: right;">−0.311</td>
+<td>James Mead (joined in 1938)</td>
+</tr>
+<tr>
+<td>New York</td>
+<td>1949</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">−0.458</td>
+<td style="text-align: right;">−0.558</td>
+<td>Herbert Lehman (joined in November 1949)</td>
+</tr>
+<tr>
+<td>New York</td>
+<td>1950</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">−0.658</td>
+<td style="text-align: right;">−0.558</td>
+<td>Robert Wagner (resigned in 1949)</td>
+</tr>
+<tr>
+<td>North Carolina</td>
+<td>1949</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.020</td>
+<td style="text-align: right;">−0.167</td>
+<td>Frank Graham and Willis Smith (joined after the nomination)</td>
+</tr>
+<tr>
+<td>North Carolina</td>
+<td>1985</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.617</td>
+<td style="text-align: right;">0.501</td>
+<td>James Broyhill (joined in 1986)</td>
+</tr>
+<tr>
+<td>Oregon</td>
+<td>1937</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.368</td>
+<td style="text-align: right;">−0.490</td>
+<td>Alfred Reames (joined in 1938), so Boyd has Roosevelt's score</td>
+</tr>
+<tr>
+<td>Rhode Island</td>
+<td>1950</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.299</td>
+<td style="text-align: right;">−0.391</td>
+<td>J. Howard McGrath and Edward Leahy (left the Senate before the nomination; Leahy is the judge)</td>
+</tr>
+<tr>
+<td>South Carolina</td>
+<td>1941</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">−0.212</td>
+<td style="text-align: right;">−0.297</td>
+<td>James Byrnes (left for the Supreme Court in 1941)</td>
+</tr>
+<tr>
+<td>South Carolina</td>
+<td>1966</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">−0.031</td>
+<td style="text-align: right;">−0.099</td>
+<td>Olin Johnston (died in 1965)</td>
+</tr>
+<tr>
+<td>Texas</td>
+<td>1942</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">−0.106</td>
+<td>Morris Sheppard (died in 1941)</td>
+</tr>
+<tr>
+<td>Texas</td>
+<td>1962</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">−0.416</td>
+<td style="text-align: right;">−0.155</td>
+<td>William Blakley (left in 1961)</td>
+</tr>
+<tr>
+<td>Texas</td>
+<td>1993–1994</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">−0.438</td>
+<td style="text-align: right;">−0.117</td>
+<td>Bob Krueger (left in June 1993), so Boyd has Clinton's score</td>
+</tr>
+<tr>
+<td>Washington</td>
+<td>1939–1940</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">−0.149</td>
+<td style="text-align: right;">−0.243</td>
+<td>Monrad Wallgren (joined in December 1940)</td>
+</tr>
+</tbody>
+</table>
+<p>The other 11 differ for reasons that seem to lie in Boyd's file:</p>
+<table>
+<thead>
+<tr>
+<th>Judges</th>
+<th style="text-align: right;">Boyd</th>
+<th style="text-align: right;">Computed</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>James Connell (Ohio, 1954)</td>
+<td style="text-align: right;">0.164</td>
+<td style="text-align: right;">0.446</td>
+<td>Boyd's score is the mean of John Bricker's and Thomas Burke's, but Burke was a Democrat and Eisenhower a Republican.</td>
+</tr>
+<tr>
+<td>John Cannella, Charles Tenney, Bernard Moynahan (New York and Kentucky, 1963), and Orrin Judd, Morris Lasker, Anthony Travia (New York, 1967–1968)</td>
+<td style="text-align: right;">−0.337</td>
+<td style="text-align: right;">−0.472</td>
+<td>Boyd gives all six Lyndon Johnson's score. The first three were nominated by Kennedy, before his death; for the others, the senator of Johnson's party was Robert Kennedy, whose score is −0.472.</td>
+</tr>
+<tr>
+<td>Cyrus Tavares (Hawaii, 1961)</td>
+<td style="text-align: right;">0.281</td>
+<td style="text-align: right;">0.165</td>
+<td>Boyd gives Eisenhower's score, leaving out Hiram Fong, a Republican.</td>
+</tr>
+<tr>
+<td>Leonard Stark (Delaware, 2010)</td>
+<td style="text-align: right;">−0.353</td>
+<td style="text-align: right;">−0.281</td>
+<td>Boyd's score is the mean of Ted Kaufman's and Joe Biden's, who had left the Senate to be vice president.</td>
+</tr>
+<tr>
+<td>Edmond Chang (Illinois, 2010)</td>
+<td style="text-align: right;">−0.345</td>
+<td style="text-align: right;">−0.403</td>
+<td>Boyd leaves out Roland Burris, who held a seat until November 2010.</td>
+</tr>
+<tr>
+<td>James Allred (Texas, 1939)</td>
+<td style="text-align: right;">−0.219</td>
+<td style="text-align: right;">−0.275</td>
+<td>Unexplained: Boyd's score matches no Texas senators.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="justices-and-epstein-et-al">Justices and Epstein et al.<a class="headerlink" href="#justices-and-epstein-et-al" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Justice</th>
+<th style="text-align: right;">Term</th>
+<th style="text-align: right;">Published</th>
+<th style="text-align: right;">Computed</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ketanji Brown Jackson</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">−0.444</td>
+<td style="text-align: right;">−0.577</td>
+<td>Her first term. The current Martin-Quinn scores, which include her later terms, estimate it again.</td>
+</tr>
+<tr>
+<td>Clarence Thomas</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.648</td>
+<td style="text-align: right;">0.701</td>
+<td>The same re-estimate of the 2022 term.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="using-the-published-scores">Using the published scores<a class="headerlink" href="#using-the-published-scores" title="Permanent link">&para;</a></h3>
+<p><code>--use-published</code> (off by default) gives a judge or a justice's term the
+published score wherever it differs from the computed one by more than 0.05
+(or <code>--published-threshold</code>): Epstein et al.'s for circuit judges and
+justices, and Boyd's for district judges. The Scores and Justices sheets
+then say where each score came from (<code>jcs_source</code>) and keep the computed
+score beside it (<code>computed_jcs</code>); the check sheets still compare the
+computed scores. With the default settings, it replaces the scores of 95
+appointments since 1953 (80 district judges, 14 circuit judges, and Justice
+Jackson's appointment, from her first term) and of two justice-terms; with
+<code>--senators date</code>, it replaces 46 (13 district judges, 32 circuit judges,
+and Justice Jackson's).</p>
+<p>Use it to reproduce the published scores, as when a study must line up with
+earlier work that used them. It is off by default because:</p>
+<ul>
+<li>The two sources count senators differently (Boyd by the day, Epstein et al.
+  by the Congress), so taking both mixes their rules: with either setting of
+  <code>--senators</code>, one of them is overruled.</li>
+<li>Some of the published scores that it would take look like slips, such as
+  John Nalbandian's, Morris Arnold's, James Connell's, and the six New York
+  and Kentucky judges'.</li>
+<li>Only judges in the published files can be replaced, so judges appointed in
+  the same circumstances can end up with scores made by different rules.</li>
+<li>The published scores were made with older Voteview files, so they lag
+  behind the current scores of senators who are still serving.</li>
+</ul>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<h3 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Python 3.11 or later</li>
+<li>An internet connection, the first time, to download the source files
+  (about 25 megabytes)</li>
+</ul>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<p>To install <code>judicial_common_space</code>, use <code>pip</code>:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>judicial-common-space
+</span></code></pre></div>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
+<p>From the command line:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>judicial-common-space<span class="w"> </span>--output<span class="w"> </span>judicial_common_space.xlsx
+</span></code></pre></div>
+<p>Or from Python:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">judicial_common_space</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">judicial_common_space</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">'judicial_common_space.xlsx'</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1953</span><span class="p">)</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--output</code></td>
+<td><code>judicial_common_space.xlsx</code></td>
+<td>Where to save the spreadsheet.</td>
+</tr>
+<tr>
+<td><code>--start-year</code></td>
+<td><code>1953</code></td>
+<td>Include judges who served on a court in this year or later, and the justices' terms from the one sitting in January of that year. The default is the first year of the original study, which covered 1953 through 2000; the published scores now run through 2024, and these through the latest data.</td>
+</tr>
+<tr>
+<td><code>--senators</code></td>
+<td><code>congress</code></td>
+<td>Which senators count: <code>congress</code> (as the published scores do) or <code>date</code> (those holding the seats on the day).</td>
+</tr>
+<tr>
+<td><code>--transformation</code></td>
+<td><code>jcs2024</code></td>
+<td>How Martin-Quinn scores are put on the scale: <code>jcs2024</code> or <code>paper</code>.</td>
+</tr>
+<tr>
+<td><code>--martin-quinn</code></td>
+<td>the data folder's</td>
+<td>The Martin-Quinn <code>justices.csv</code>, if it cannot be downloaded. The Martin-Quinn site checks for automated browsers, so if the download fails, save the file from its page and pass its path (or put it in the data folder's <code>politics</code> folder).</td>
+</tr>
+<tr>
+<td><code>--data-folder</code></td>
+<td><code>data/courts</code> beside the code folder</td>
+<td>Where the downloads are kept: the same folders that <a href="https://github.com/WithPrecedent/courtpy">courtpy</a> uses, so the projects share them. Set <code>JUDICIAL_COMMON_SPACE_DATA_DIR</code> to change it for good.</td>
+</tr>
+<tr>
+<td><code>--overwrite</code></td>
+<td>off</td>
+<td>Download the files again, as when the center has added judges or Voteview has added votes.</td>
+</tr>
+<tr>
+<td><code>--no-download</code></td>
+<td>off</td>
+<td>Use only the files that are already there.</td>
+</tr>
+<tr>
+<td><code>--use-published</code></td>
+<td>off</td>
+<td>Use the published score (Epstein et al.'s for circuit judges and justices, Boyd's for district judges) where it differs from the computed one by more than the threshold (see <a href="#using-the-published-scores">Using the published scores</a>).</td>
+</tr>
+<tr>
+<td><code>--published-threshold</code></td>
+<td><code>0.05</code></td>
+<td>The largest difference from a published score that keeps the computed score, with <code>--use-published</code>.</td>
+</tr>
+<tr>
+<td><code>--no-check</code></td>
+<td>off</td>
+<td>Do not compare the scores with the published scores.</td>
+</tr>
+</tbody>
+</table>
+<p>The spreadsheet has these sheets:</p>
+<table>
+<thead>
+<tr>
+<th>Sheet</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scores</td>
+<td>A row for each appointment: <code>judge</code>, <code>nid</code>, <code>jid</code>, the court, the president and party, the dates, the Congress, <code>home_state</code> (a postal code) and <code>state_source</code> (how it was found), <code>duty_station</code> (Wikipedia's state for a circuit judge), <code>method</code> and <code>senators</code> (how the score was found), <code>president_score</code>, <code>computed_jcs</code>, <code>jcs</code>, and <code>jcs_source</code> ("computed", or with <code>--use-published</code>, "Epstein et al." or "Boyd").</td>
+</tr>
+<tr>
+<td>Justices</td>
+<td>Each justice's Martin-Quinn and JCS scores in each term, with <code>computed_jcs</code> and <code>jcs_source</code>.</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>The agreement with each set of published scores.</td>
+</tr>
+<tr>
+<td>Circuit check, District check, Justice check</td>
+<td>Every comparison, with both scores and how the computed one was found.</td>
+</tr>
+<tr>
+<td>About</td>
+<td>The method, the sources, and the settings.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
+<p>Contributors are always welcome. Feel free to grab an <a href="https://www.github.com/WithPrecedent/judicial_common_space/issues">issue</a> to work on or make a suggested improvement. If you wish to contribute, please read the <a href="https://www.github.com/WithPrecedent/judicial_common_space/contributing.md">Contribution Guide</a> and <a href="https://www.github.com/WithPrecedent/judicial_common_space/code_of_conduct.md">Code of Conduct</a>.</p>
+<h2 id="similar-projects">Similar Projects<a class="headerlink" href="#similar-projects" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/WithPrecedent/courtpy">courtpy</a> adds the published JCS
+  scores (and the other measures here) to court cases, and shares this
+  package's downloads.</li>
+<li>The <a href="https://epstein.wustl.edu/jcs">JCS scores</a> of Lee Epstein, Andrew D.
+  Martin, Jeffrey A. Segal, and Chad Westerland, for the judges of the courts
+  of appeals and the justices.</li>
+<li>Christina L. Boyd's <a href="https://sites.wustl.edu/clboyd/research">Federal District Court Judge Ideology
+  Data</a>, which scores district
+  judges by the same rule.</li>
+</ul>
+<h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h2>
+<p>The scores rest on the work and data of Epstein, Martin, Segal, and
+Westerland; Micheal W. Giles, Virginia A. Hettinger, and Todd Peppers; Keith
+T. Poole, Howard Rosenthal, and Voteview; Andrew D. Martin and Kevin M. Quinn;
+the Federal Judicial Center; the contributors to congress-legislators and to
+Wikipedia (whose text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+Attribution-ShareAlike License</a>);
+and Christina L. Boyd. Please cite them when you use the scores.</p>
+<p>This project was generated from <a href="https://github.com/WithPrecedent">@WithPrecedent</a>'s <a href="https://www.github.com/WithPrecedent/snickerdoodle"><img alt="cookiecutter Template" src="https://img.shields.io/badge/snickerdoodle-bisque?style=for-the-badge&amp;logo=cookiecutter&amp;labelColor=gray" /></a> template.</p>
+<h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
+<p>If you use <code>judicial_common_space</code> in your research, definitely cite these works:</p>
+<p><div class="highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nc">@misc</span><span class="p">{</span><span class="nl">boyd_district_2015</span><span class="p">,</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Boyd, Christina L.}</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="na">title</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Federal District Court Judge Ideology Data}</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="na">year</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{2015}</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="na">url</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{http://cLboyd.net}</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nc">@article</span><span class="p">{</span><span class="nl">epstein_jcs_2007</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Epstein, Lee and Martin, Andrew D. and Segal, Jeffrey A. and Westerland, Chad}</span><span class="p">,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{The Judicial Common Space}</span><span class="p">,</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Journal of Law, Economics, and Organization}</span><span class="p">,</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{23}</span><span class="p">,</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="na">number</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{2}</span><span class="p">,</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{303--325}</span><span class="p">,</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2007}</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="p">}</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="nc">@article</span><span class="p">{</span><span class="nl">giles_picking_2001</span><span class="p">,</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Giles, Micheal W. and Hettinger, Virginia A. and Peppers, Todd}</span><span class="p">,</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Picking Federal Judges: A Note on Policy and Partisan Selection Agendas}</span><span class="p">,</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Political Research Quarterly}</span><span class="p">,</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{54}</span><span class="p">,</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">  </span><span class="na">number</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{3}</span><span class="p">,</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{623--641}</span><span class="p">,</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2001}</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="p">}</span>
+</span></code></pre></div>
+And, although my contributions to the JCS project are relatively minor, feel free to cite the repository as well:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nc">@software</span><span class="p">{</span><span class="nl">yung_judicial_common_space</span><span class="p">,</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Yung, Corey Rayburn}</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{judicial_common_space: Judicial Common Space scores for every Article III appointment}</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="na">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{0.1.0}</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="na">url</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{https://github.com/WithPrecedent/judicial_common_space}</span><span class="p">,</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="na">license</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Apache-2.0}</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>Use of this repository is authorized under the <a href="https://www.github.com/WithPrecedent/judicial_common_space/blob/main/LICENSE">Apache Software License 2.0</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+        
+          
+          <a href="changelog/" class="md-footer__link md-footer__link--next" aria-label="Next: Changelog">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Changelog
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright, 2026 Corey Rayburn Yung
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/WithPrecedent" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://pypi.org/project/judicial-common-space/" target="_blank" rel="noopener" title="pypi.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6M286.2 444.7a20.4 20.4 0 1 1 0-40.7 20.4 20.4 0 1 1 0 40.7M167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4m-6.6-183.4a20.4 20.4 0 1 1 0 40.8 20.4 20.4 0 1 1 0-40.8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.path", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="assets/_markdown_exec_pyodide.js"></script>
+      
+    
+  </body>
+</html>
